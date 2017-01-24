@@ -1,0 +1,34 @@
+{
+  "name": "shroff",
+  "version": "0.0.1",
+  "author": "Majid Hajian <me@majidhajian.com> (https://www.majidhajian.com/)",
+  "description": "A Real Time Money Exchange Rate Application",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhadaily/shroff.git"
+  },
+  "keywords": [
+    "Shroff",
+    "Money Exchange",
+    "Exchange Rate"
+  ],
+  "bugs": {
+    "url": "https://github.com/mhadaily/shroff/issues"
+  },
+  "homepage": "https://github.com/mhadaily/shroff",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "hbs": "~4.0.1",
+    "morgan": "~1.7.0",
+    "node-sass-middleware": "0.9.8",
+    "serve-favicon": "~2.3.0"
+  }
+}
