@@ -24,3 +24,6 @@ jspm_packages
 *.tgz
 .yarn-integrity
 shroff.iml
+.env
+public/stylesheets/style.css
+public/stylesheets/style.css.map
