@@ -16,7 +16,7 @@
     "url": "https://github.com/mhadaily/shroff/issues"
   },
   "engines": {
-    "node": ">= 4.0.0"
+    "node": ">= 6.9.1"
   },
   "homepage": "https://github.com/mhadaily/shroff",
   "license": "Apache-2.0",
