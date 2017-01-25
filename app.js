@@ -1,15 +1,47 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const helmet = require('helmet');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
 
-var app = express();
+/*
 
+ // compress responses
+ app.use(compression())
+
+ // server-sent event stream
+ app.get('/events', function (req, res) {
+ res.setHeader('Content-Type', 'text/event-stream')
+ res.setHeader('Cache-Control', 'no-cache')
+
+ // send a ping approx every 2 seconds
+ var timer = setInterval(function () {
+ res.write('data: ping\n\n')
+
+ // !!! this is the important part
+ res.flush()
+ }, 2000)
+
+ res.on('close', function () {
+ clearInterval(timer)
+ })
+ })
+
+
+ */
+
+
+const index = require('./routes/index');
+const users = require('./routes/users');
+const form = require('./routes/form');
+
+const app = express();
+
+app.use(helmet());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -28,12 +60,15 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/form', form);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
