@@ -1,0 +1,14 @@
+{{#if currentUser}}
+
+    {{#if (eq currentUser.id  user.id)}}
+        <a href="/edit" class="pull-right">Edit your profile</a>
+    {{/if}}
+
+{{/if}}
+
+
+<h1>{{user.name }}</h1>
+<h2>Joined on {{user.createdAt}}</h2>
+{{#if user.bio}}
+    <p>{{user.bio}}}</p>
+{{/if}}
