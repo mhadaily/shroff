@@ -19,8 +19,11 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.get("/", ensureAuthenticated, function (req, res) {
-  res.render("admin/index", {username: req.user.username});
+//router.get("/", ensureAuthenticated, function (req, res) {
+//  res.render("admin/index", {username: req.user.username});
+//});
+router.get("/", function (req, res) {
+  res.render("admin/index", {username: 'GUEST'});
 });
 
 router.get("/userlist", function (req, res, next) {
