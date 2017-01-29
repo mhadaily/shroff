@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  dev:
+    container_name: shroff
+    build: .
+    command: npm run startDev
+    ports:
+      - "3030:3000"
+    links:
+      - mongodb_dev:mongodb_dev
+    volumes:
+       - .:/home/shroff/app
+       - shroff-deps:/home/shroff/app/node_modules
+
+  mongodb_dev:
+    container_name: mongodb_dev
+    image: mongo:3.4.1
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  mongodb-data:
+    driver: local
+  shroff-deps:

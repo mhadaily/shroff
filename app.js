@@ -44,7 +44,11 @@ const admin = require('./routes/admin/index');
 const category = require('./routes/admin/category/index');
 
 const app = express();
-mongoose.connect('mongodb://localhost:27017/shroff-development');
+try {
+  mongoose.connect('mongodb://mongodb_dev:27017/shroff-development');
+} catch (e) {
+  console.log('No Database!', e);
+}
 
 setUpPassport();
 

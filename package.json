@@ -16,7 +16,7 @@
     "url": "https://github.com/mhadaily/shroff/issues"
   },
   "engines": {
-    "node": ">= 6.9.1"
+    "node": ">= 7.4.0"
   },
   "homepage": "https://github.com/mhadaily/shroff",
   "license": "Apache-2.0",
@@ -26,23 +26,23 @@
     "startDev": "nodemon ./bin/www"
   },
   "dependencies": {
-    "bcrypt-nodejs": "^0.0.3",
-    "body-parser": "^1.16.0",
-    "compression": "^1.6.2",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "~1.4.3",
-    "cookie-session": "^2.0.0-alpha.2",
-    "csurf": "^1.9.0",
-    "debug": "^2.6.0",
-    "express": "~4.14.0",
-    "express-session": "^1.15.0",
-    "hbs": "~4.0.1",
-    "helmet": "^3.4.0",
-    "mongoose": "^4.7.8",
-    "morgan": "~1.7.0",
-    "node-sass-middleware": "^0.11.0",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "serve-favicon": "~2.3.0"
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.16.0",
+    "compression": "1.6.2",
+    "connect-flash": "0.1.1",
+    "cookie-parser": "1.4.3",
+    "cookie-session": "2.0.0-alpha.2",
+    "csurf": "1.9.0",
+    "debug": "2.6.0",
+    "express": "4.14.0",
+    "express-session": "1.15.0",
+    "hbs": "4.0.1",
+    "helmet": "3.4.0",
+    "mongoose": "4.7.8",
+    "morgan": "1.7.0",
+    "node-sass-middleware": "0.11.0",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "serve-favicon": "2.3.0"
   }
 }
