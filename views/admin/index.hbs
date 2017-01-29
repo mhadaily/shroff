@@ -1,16 +1,11 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+you are login as {{username}}
 
-{{#each users as |user|}}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <a href="/users/{{user.username}}">
-                {{user.name}}
-            </a>
-        </div>
-        {{#if user.bio}}
-            <div class="panel-body">{{user.bio}}</div>
-        {{/if}}
-    </div>
-{{/each}}
-
+<nav>
+    <ul>
+        <li>Home</li>
+        <li>Add user</li>
+        <li>Add Category</li>
+        <li>Add Type</li>
+        <li>Add Exchange</li>
+    </ul>
+</nav>
