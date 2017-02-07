@@ -1,0 +1,25 @@
+{{messages}}
+<h1>Add segment</h1>
+
+<form action="/admin/segment/add" method="post">
+    <input type="text" name="name" placeholder="Name"/>
+    <fieldset>
+        <legend>Categories</legend>
+        {{#if categories}}
+            {{#each categories as |category|}}
+                <label><input type="radio" name="category" value="{{category._id}}">{{category.name}}</label>
+            {{/each}}
+        {{/if}}
+    </fieldset>
+
+    <fieldset>
+        <legend>Currencies</legend>
+        {{#if currencies}}
+            {{#each currencies as |currency|}}
+                <label><input type="checkbox" name="currencies" value="{{currency._id}}">{{currency.name}}</label>
+            {{/each}}
+        {{/if}}
+    </fieldset>
+
+    <input type="submit" value="ADD Currency" class="btn btn-primary btn-block">
+</form>

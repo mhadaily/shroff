@@ -43,6 +43,7 @@ const index = require('./routes/index');
 const admin = require('./routes/admin/index');
 const category = require('./routes/admin/category/index');
 const currency = require('./routes/admin/currency/index');
+const segment = require('./routes/admin/segment/index');
 
 const app = express();
 try {
@@ -90,6 +91,7 @@ app.use('/', index);
 app.use('/admin', admin);
 app.use('/admin/category', category);
 app.use('/admin/currency', currency);
+app.use('/admin/segment', segment);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

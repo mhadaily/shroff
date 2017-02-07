@@ -1,0 +1,19 @@
+{{segment._id}}<br>
+{{segment.name}}<br>
+{{segment.createdAt}}<br>
+<hr>
+<ul>
+    <h3>Categories</h3>
+
+        {{segment.category}}
+
+</ul>
+<hr>
+<ul>
+    <h3>currencies</h3>
+        {{#each segment.currencies as |currency|}}
+            <li> {{currency}}</li>
+        {{/each}}
+</ul>
+
+<a href="/admin/segment">Back</a>
