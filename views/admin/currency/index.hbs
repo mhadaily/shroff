@@ -1,0 +1,13 @@
+<a href="/admin/currency/add">Add currency</a>
+
+{{#if currencies}}
+    {{#each currencies as |currency|}}
+        <li>{{currency.name}}
+            <form method="GET" action='/admin/currency/{{currency._id}}'><input type="submit" value="View"></form>
+            <!--<form method="post" action='{{currency._id}}'><input type="submit" value="edit"></form>-->
+            <form method="post" action='/admin/currency/{{currency._id}}'><input type="submit" value="delete"></form>
+        </li>
+    {{/each}}
+{{else}}
+    No currency
+{{/if}}
