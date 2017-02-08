@@ -1,0 +1,9 @@
+{{#if segments}}
+    {{#each segments as |segment|}}
+        <li>{{segment.name}}
+            <form method="GET" action='/admin/exchange/{{segment._id}}/add'><input type="submit" value="Add Exchange"></form>
+        </li>
+    {{/each}}
+{{else}}
+    No exchange
+{{/if}}

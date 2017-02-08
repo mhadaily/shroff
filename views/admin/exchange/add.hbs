@@ -1,0 +1,16 @@
+{{messages}}
+<h1>Add exchange</h1>
+
+<form action="/admin/exchange/add" method="post">
+    <fieldset>
+        <legend>Currencies</legend>
+        {{#if currencies}}
+            {{#each currencies as |currency|}}
+                <label>{{currency.name}}<input type="input" name="{{currency.symbol}}Sell" placeholder="{{currency.symbol}}Sell" value=""></label>
+                <label>{{currency.name}}<input type="input" name="{{currency.symbol}}Buy" placeholder="{{currency.symbol}}Buy" value=""></label><br/>
+            {{/each}}
+        {{/if}}
+    </fieldset>
+
+    <input type="submit" value="ADD EXCHANGE" class="btn btn-primary btn-block">
+</form>
