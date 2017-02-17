@@ -2,9 +2,9 @@
     {{currency._id}}<br/>
     {{currency.createdAt}}<br/>
     {{#each currency.currencyList as |list|}}
-    {{#each list as |k v|}}
-        {{v}} [ Buy: {{k.buy}} | Sell: {{k.sell}} ]
-    {{/each}}
+        {{#each list as |k v|}}
+            {{v}} [ Buy: {{k.buy}} | Sell: {{k.sell}} ] <br>
+        {{/each}}
     {{/each}}
 {{/each}}
 
