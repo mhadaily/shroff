@@ -1,17 +1,11 @@
-{{segment._id}}<br>
-{{segment.name}}<br>
-{{segment.createdAt}}<br>
-<hr>
-<ul>
-    <h3>Categories</h3>
-    {{segment.category}}
-</ul>
-<hr>
-<ul>
-    <h3>currencies</h3>
-    {{#each segment.currencies as |currency|}}
-        <li> {{currency}}</li>
+{{#each exchangesList as | currency| }}
+    {{currency._id}}<br/>
+    {{currency.createdAt}}<br/>
+    {{#each currency.currencyList as |list|}}
+    {{#each list as |k v|}}
+        {{v}} [ Buy: {{k.buy}} | Sell: {{k.sell}} ]
     {{/each}}
-</ul>
+    {{/each}}
+{{/each}}
 
-<a href="/admin/segment">Back</a>
+<a href="/admin/exchnage">Back</a>

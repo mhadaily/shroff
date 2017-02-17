@@ -15,46 +15,51 @@ router.get('/', function (req, res) {
 router.get('/:segment_id/add', function (req, res) {
   const _id = req.params.segment_id;
 
-  let lists = [];
+  const lists = [];
   Segment.findById(_id).then(segment => {
     segment.currencies.map(id => {
       Currency.findById(id, (err, curr) => {
-        lists = [...lists, curr];
-        res.render('admin/exchange/add', {currencies: lists});
+        lists.push(curr);
       });
     });
   });
+  res.render('admin/exchange/add', {currencies: lists});
 
+});
+
+router.post('/:segment_id/add', function (req, res, next) {
+
+  const _id = req.params.segment_id;
+  const currencyList = req.body;
+
+  const newSegment = new Exchange({
+    segment: _id,
+    currencyList
+  });
+
+  newSegment.save(next).then(() => {
+    res.redirect('/admin/segment');
+  });
 
 });
 
-router.post('/add', function (req, res, next) {
-
-  const name = req.body.name;
-  const category = req.body.category;
-  const currencies = req.body.currencies;
-
-
-
-  //Segment.findOne({name: name}, function (err, segment) {
-  //
-  //  if (err) { return next(err); }
-  //  if (segment) {
-  //    req.flash("error", "Segment already exists");
-  //    return res.render("admin/segment/add", {messages: req.flash('error')});
-  //  }
-  //
-  //  const newSegment = new Segment({
-  //    name,
-  //    category,
-  //    currencies
-  //  });
-  //  newSegment.save(next).then(() => {
-  //    res.redirect('/admin/segment');
-  //  });
-  //});
-
+router.get('/:segment_id', function (req, res, next) {
+  const exchanges = [];
+  Exchange.find({segment: req.params.segment_id}).then(res => {
+    res.map(list => {
+      exchanges.push(list);
+    });
+  });
+  res.render('admin/exchange/list', {exchanges});
 });
+
+router.get('/single/:exchange_id', function (req, res, next) {
+  Exchange.find({_id: req.params.exchange_id}).then(exchangesList => {
+    res.render('admin/exchange/single', {exchangesList});
+  });
+});
+
+module.exports = router;
 
 //REST API READY !!!
 //router.route('/:segment_id')
@@ -79,40 +84,3 @@ router.post('/add', function (req, res, next) {
 //      });
 //
 //    });
-
-router.get('/:segment_id', function (req, res, next) {
-
-  Segment.findOne({
-    _id: req.params.segment_id
-  }, (err, segment) => {
-
-    if (err) { return next(err); }
-
-    if (!segment) {
-      req.flash("error", "Segment does not exist");
-      return res.redirect("/admin/segment", {messages: req.flash('error')});
-    }
-    res.render('admin/segment/single', {segment});
-  });
-
-});
-
-router.post('/:segment_id', function (req, res, next) {
-
-  Segment.findByIdAndRemove({
-    _id: req.params.segment_id
-  }, function (err, segment) {
-
-    if (err) { return next(err); }
-
-    if (!segment) {
-      req.flash("error", "Segment already deleted");
-      return res.redirect("/admin/segment");
-    }
-
-    res.redirect('/admin/segment');
-  });
-
-});
-
-module.exports = router;

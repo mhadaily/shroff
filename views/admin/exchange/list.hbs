@@ -1,0 +1,9 @@
+{{#if exchanges}}
+    {{#each exchanges as |exchange|}}
+        <li>{{exchange._id}}
+            <a href="/admin/exchange/single/{{exchange._id}}">View Exchange</a>
+        </li>
+    {{/each}}
+{{else}}
+    No exchange
+{{/if}}

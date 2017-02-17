@@ -1,7 +1,7 @@
 {{#if segments}}
     {{#each segments as |segment|}}
         <li>{{segment.name}}
-            <form method="GET" action='/admin/exchange/{{segment._id}}/add'><input type="submit" value="Add Exchange"></form>
+           <a href="/admin/exchange/{{segment._id}}/add">Add Exchange</a> |   <a href="/admin/exchange/{{segment._id}}">List Exchange</a>
         </li>
     {{/each}}
 {{else}}
