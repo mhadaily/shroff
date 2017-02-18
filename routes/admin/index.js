@@ -15,15 +15,6 @@ router.get("/", ensureAuthenticated, (req, res) => {
   res.render("admin/index", {username: req.user.username});
 });
 
-router.get("/userlist", ensureAuthenticated, (req, res, next) => {
-  User.find()
-      .sort({createdAt: "descending"})
-      .exec(function (err, users) {
-        if (err) { return next(err); }
-        res.render("admin/userlist", {users: users});
-      });
-});
-
 router.get("/login", (req, res) => {
   if (req.user) {
     res.redirect("/admin");
@@ -73,6 +64,15 @@ router.post("/signup", (req, res, next) => {
   failureFlash: true
 }));
 
+router.get("/users", ensureAuthenticated, (req, res, next) => {
+  User.find()
+      .sort({createdAt: "descending"})
+      .exec(function (err, users) {
+        if (err) { return next(err); }
+        res.render("admin/userlist", {users: users});
+      });
+});
+
 router.get("/users/:username", ensureAuthenticated, (req, res, next) => {
   User.findOne({username: req.params.username}, (err, user) => {
     if (err) { return next(err); }
@@ -81,17 +81,17 @@ router.get("/users/:username", ensureAuthenticated, (req, res, next) => {
   });
 });
 
-router.post("/edit", ensureAuthenticated, (req, res, next) => {
-  req.user.displayName = req.body.displayname;
-  req.user.bio = req.body.bio;
-  req.user.save((err) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    req.flash("info", "Profile updated!");
-    res.redirect("/edit");
-  });
-});
+//router.post("/users/:username/edit", ensureAuthenticated, (req, res, next) => {
+//  req.user.displayName = req.body.displayname;
+//  req.user.bio = req.body.bio;
+//  req.user.save((err) => {
+//    if (err) {
+//      next(err);
+//      return;
+//    }
+//    req.flash("info", "Profile updated!");
+//    res.redirect('/users');
+//  });
+//});
 
 module.exports = router;
