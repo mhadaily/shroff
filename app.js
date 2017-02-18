@@ -81,7 +81,10 @@ app.use(session({
   secret: "LUp$Dg?,I#i&owP3=9su+OB%`JgL4muLF5YJ~{;t",
   resave: true,
   saveUninitialized: true,
-  cookie: {maxAge: 60000}
+  cookie: {
+    //secure: true,
+    maxAge: 3600000
+  }
 }));
 app.use(flash());
 

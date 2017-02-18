@@ -11,12 +11,8 @@ router.use((req, res, next) => {
   next();
 });
 
-//router.get("/", ensureAuthenticated, function (req, res) {
-//  res.render("admin/index", {username: req.user.username});
-//});
-
 router.get("/", ensureAuthenticated, (req, res) => {
-  res.render("admin/index", {username: res.user.username});
+  res.render("admin/index", {username: req.user.username});
 });
 
 router.get("/userlist", ensureAuthenticated, (req, res, next) => {
@@ -28,8 +24,12 @@ router.get("/userlist", ensureAuthenticated, (req, res, next) => {
       });
 });
 
-router.get("/login", function (req, res) {
-  res.render("admin/login");
+router.get("/login", (req, res) => {
+  if (req.user) {
+    res.redirect("/admin");
+  } else {
+    res.render("admin/login");
+  }
 });
 
 router.post("/login", passport.authenticate("login", {
@@ -68,13 +68,13 @@ router.post("/signup", (req, res, next) => {
 
   });
 }, passport.authenticate("login", {
-  successRedirect: "/",
-  failureRedirect: "/signup",
+  successRedirect: "/admin/login",
+  failureRedirect: "/admin/signup",
   failureFlash: true
 }));
 
 router.get("/users/:username", ensureAuthenticated, (req, res, next) => {
-  User.findOne({username: req.params.username}, function (err, user) {
+  User.findOne({username: req.params.username}, (err, user) => {
     if (err) { return next(err); }
     if (!user) { return next(404); }
     res.render("admin/profile", {user: user});
@@ -84,7 +84,7 @@ router.get("/users/:username", ensureAuthenticated, (req, res, next) => {
 router.post("/edit", ensureAuthenticated, (req, res, next) => {
   req.user.displayName = req.body.displayname;
   req.user.bio = req.body.bio;
-  req.user.save(function (err) {
+  req.user.save((err) => {
     if (err) {
       next(err);
       return;
