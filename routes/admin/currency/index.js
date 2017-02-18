@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Currecny = require('../../../models/currency');
+const {ensureAuthenticated} = require("../authenticationMiddleware");
 
-router.get('/', function (req, res) {
+router.get('/', ensureAuthenticated, (req, res) => {
   Currecny.find(function (err, currencies) {
     if (err) { return next(err); }
     return res.render('admin/currency/index', {currencies});
   });
 });
 
-router.get('/add', function (req, res) {
+router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('admin/currency/add');
 });
 
-router.post('/add', function (req, res, next) {
+router.post('/add', ensureAuthenticated, (req, res, next) => {
 
   const name = req.body.name;
   const symbol = req.body.symbol;
@@ -63,7 +64,7 @@ router.post('/add', function (req, res, next) {
 //
 //    });
 
-router.get('/:currency_id', function (req, res, next) {
+router.get('/:currency_id', ensureAuthenticated, (req, res, next) => {
 
   Currecny.findOne({
     _id: req.params.currency_id
@@ -81,7 +82,7 @@ router.get('/:currency_id', function (req, res, next) {
 
 });
 
-router.post('/:currency_id', function (req, res, next) {
+router.post('/:currency_id', ensureAuthenticated, (req, res, next) => {
 
   Currecny.findByIdAndRemove({
     _id: req.params.currency_id

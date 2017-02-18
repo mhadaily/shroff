@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../../../models/category');
+const {ensureAuthenticated} = require("../authenticationMiddleware");
 
-router.get('/', function (req, res) {
+router.get('/', ensureAuthenticated, (req, res) => {
   Category.find(function (err, categories) {
     if (err) { return next(err); }
     return res.render('admin/category/index', {categories});
   });
 });
 
-router.get('/add', function (req, res) {
+router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('admin/category/add');
 });
 
-router.post('/add', function (req, res, next) {
+router.post('/add', ensureAuthenticated, (req, res, next) => {
 
   const name = req.body.name;
   const thumbnail = req.body.thumbnail;
@@ -61,7 +62,7 @@ router.post('/add', function (req, res, next) {
 //
 //    });
 
-router.get('/:category_id', function (req, res, next) {
+router.get('/:category_id', ensureAuthenticated, (req, res, next) => {
 
   Category.findOne({
     _id: req.params.category_id
@@ -79,7 +80,7 @@ router.get('/:category_id', function (req, res, next) {
 
 });
 
-router.post('/:category_id', function (req, res, next) {
+router.post('/:category_id', ensureAuthenticated, (req, res, next) => {
 
   Category.findByIdAndRemove({
     _id: req.params.category_id

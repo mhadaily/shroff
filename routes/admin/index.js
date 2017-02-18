@@ -2,17 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const User = require("../../models/user");
 const router = express.Router();
+const {ensureAuthenticated} = require("./authenticationMiddleware");
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    req.flash("info", "You must be logged in to see this page.");
-    res.redirect("admin/login");
-  }
-}
-
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.errors = req.flash("error");
   res.locals.infos = req.flash("info");
@@ -22,11 +14,12 @@ router.use(function (req, res, next) {
 //router.get("/", ensureAuthenticated, function (req, res) {
 //  res.render("admin/index", {username: req.user.username});
 //});
-router.get("/", function (req, res) {
-  res.render("admin/index", {username: 'GUEST'});
+
+router.get("/", ensureAuthenticated, (req, res) => {
+  res.render("admin/index", {username: res.user.username});
 });
 
-router.get("/userlist", function (req, res, next) {
+router.get("/userlist", ensureAuthenticated, (req, res, next) => {
   User.find()
       .sort({createdAt: "descending"})
       .exec(function (err, users) {
@@ -45,16 +38,16 @@ router.post("/login", passport.authenticate("login", {
   failureFlash: true
 }));
 
-router.get("/logout", function (req, res) {
+router.get("/logout", ensureAuthenticated, (req, res) => {
   req.logout();
   res.redirect("/");
 });
 
-router.get("/signup", function (req, res) {
+router.get("/signup", (req, res) => {
   res.render("admin/signup");
 });
 
-router.post("/signup", function (req, res, next) {
+router.post("/signup", (req, res, next) => {
 
   const username = req.body.username;
   const password = req.body.password;
@@ -80,7 +73,7 @@ router.post("/signup", function (req, res, next) {
   failureFlash: true
 }));
 
-router.get("/users/:username", function (req, res, next) {
+router.get("/users/:username", ensureAuthenticated, (req, res, next) => {
   User.findOne({username: req.params.username}, function (err, user) {
     if (err) { return next(err); }
     if (!user) { return next(404); }
@@ -88,7 +81,7 @@ router.get("/users/:username", function (req, res, next) {
   });
 });
 
-router.post("/edit", ensureAuthenticated, function (req, res, next) {
+router.post("/edit", ensureAuthenticated, (req, res, next) => {
   req.user.displayName = req.body.displayname;
   req.user.bio = req.body.bio;
   req.user.save(function (err) {

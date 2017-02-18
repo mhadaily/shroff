@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Segment = require('../../../models/segment');
 const Currency = require('../../../models/currency');
-const Category = require('../../../models/category');
 const Exchange = require('../../../models/exchange');
+const {ensureAuthenticated} = require("../authenticationMiddleware");
 
-router.get('/', function (req, res) {
+router.get('/', ensureAuthenticated, (req, res) => {
   Segment.find((err, segments) => {
     if (err) { return next(err); }
     return res.render('admin/exchange/index', {segments});
   });
 });
 
-router.get('/:segment_id/add', function (req, res) {
+router.get('/:segment_id/add', ensureAuthenticated, (req, res) => {
   const _id = req.params.segment_id;
 
   const lists = [];
@@ -27,7 +27,7 @@ router.get('/:segment_id/add', function (req, res) {
 
 });
 
-router.post('/:segment_id/add', function (req, res, next) {
+router.post('/:segment_id/add', ensureAuthenticated, (req, res, next) => {
 
   const _id = req.params.segment_id;
   const currencyList = req.body;
@@ -38,12 +38,12 @@ router.post('/:segment_id/add', function (req, res, next) {
   });
 
   newSegment.save(next).then(() => {
-    res.redirect('/admin/segment');
+    res.redirect('/admin/exchange');
   });
 
 });
 
-router.get('/:segment_id', function (req, res, next) {
+router.get('/:segment_id', ensureAuthenticated, (req, res, next) => {
   const exchanges = [];
   Exchange.find({segment: req.params.segment_id}).then(res => {
     res.map(list => {
@@ -53,7 +53,7 @@ router.get('/:segment_id', function (req, res, next) {
   res.render('admin/exchange/list', {exchanges});
 });
 
-router.get('/single/:exchange_id', function (req, res, next) {
+router.get('/single/:exchange_id', ensureAuthenticated, (req, res, next) => {
   Exchange.find({_id: req.params.exchange_id}).then(exchangesList => {
     res.render('admin/exchange/single', {exchangesList});
   });

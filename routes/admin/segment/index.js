@@ -3,15 +3,16 @@ const router = express.Router();
 const Segment = require('../../../models/segment');
 const Currency = require('../../../models/currency');
 const Category = require('../../../models/category');
+const {ensureAuthenticated} = require("../authenticationMiddleware");
 
-router.get('/', function (req, res) {
+router.get('/', ensureAuthenticated, (req, res) => {
   Segment.find(function (err, segments) {
     if (err) { return next(err); }
     return res.render('admin/segment/index', {segments});
   });
 });
 
-router.get('/add', function (req, res) {
+router.get('/add', ensureAuthenticated, (req, res) => {
   Category.find((err, categories) => {
     if (err) { return next(err); }
     Currency.find((err, currencies) => {
@@ -22,7 +23,7 @@ router.get('/add', function (req, res) {
 
 });
 
-router.post('/add', function (req, res, next) {
+router.post('/add', ensureAuthenticated, (req, res, next) => {
 
   const name = req.body.name;
   const category = req.body.category;
@@ -72,7 +73,7 @@ router.post('/add', function (req, res, next) {
 //
 //    });
 
-router.get('/:segment_id', function (req, res, next) {
+router.get('/:segment_id', ensureAuthenticated, (req, res, next) => {
 
   Segment.findOne({
     _id: req.params.segment_id
@@ -89,7 +90,7 @@ router.get('/:segment_id', function (req, res, next) {
 
 });
 
-router.post('/:segment_id', function (req, res, next) {
+router.post('/:segment_id', ensureAuthenticated, (req, res, next) => {
 
   Segment.findByIdAndRemove({
     _id: req.params.segment_id

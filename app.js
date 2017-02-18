@@ -89,6 +89,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+
 app.use('/admin', admin);
 app.use('/admin/category', category);
 app.use('/admin/currency', currency);
