@@ -40,7 +40,7 @@ router.post("/login", passport.authenticate("login", {
 
 router.get("/logout", ensureAuthenticated, (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/admin/login");
 });
 
 router.get("/signup", (req, res) => {
