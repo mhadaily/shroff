@@ -1,3 +1,36 @@
-<h1>{{title}}</h1>
-<p>Welcome to Administrator of {{title}}</p>
+<h1>{{title}}</h1><p>Welcome to Administrator of {{title}}</p>
 
+
+<h2>Example of latest Date in Each Segment</h2>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+<script>
+
+    $.ajax('http://localhost:3030/api/v1/segment').then((res) => {
+
+        res.map(segment => {
+
+            $.getJSON("http://localhost:3030/api/v1/segment/" + segment._id, function (data) {
+                let items = [];
+                let currencies = data[0].currencyList[0];
+
+                items.push("<h3>" + segment.name + "</h3>");
+
+                $.each(currencies, function (name, values) {
+                    items.push("<li id='" + name + "'><strong>" + name + "</strong>: Buy: <strong>" + values.buy + "</strong> | Sell: <strong>" + values.sell + "</strong></li>");
+                });
+
+                $("<ul/>", {
+                    "class": "my-new-list",
+                    html: items.join("")
+                }).appendTo("body");
+
+            });
+
+        })
+
+    });
+
+</script>
