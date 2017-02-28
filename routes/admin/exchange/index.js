@@ -16,13 +16,16 @@ router.get('/:segment_id/add', ensureAuthenticated, (req, res) => {
   const _id = req.params.segment_id;
 
   const lists = [];
-  Segment.findById(_id).then(segment => {
-    segment.currencies.map(id => {
-      Currency.findById(id, (err, curr) => {
-        lists.push(curr);
+  Segment
+      .findById(_id)
+      .then(segment => {
+        segment.currencies.map(id => {
+          Currency.findById(id)
+              .exec((err, curr) => {
+                lists.push(curr);
+              });
+        });
       });
-    });
-  });
   res.render('admin/exchange/add', {currencies: lists});
 
 });
@@ -37,9 +40,11 @@ router.post('/:segment_id/add', ensureAuthenticated, (req, res, next) => {
     currencyList
   });
 
-  newSegment.save(next).then(() => {
-    res.redirect('/admin/exchange');
-  });
+  newSegment
+      .save(next)
+      .then(() => {
+        res.redirect('/admin/exchange');
+      });
 
 });
 
