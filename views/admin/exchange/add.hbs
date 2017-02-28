@@ -7,8 +7,8 @@
         {{#if currencies}}
             {{#each currencies as |currency|}}
                 <label>{{currency.name}}
-                    <input type="input" name="{{currency.symbol}}[sell]" placeholder="{{currency.symbol}}-sell" value="">
-                    <input type="input" name="{{currency.symbol}}[buy]" placeholder="{{currency.symbol}}-buy" value="">
+                    <input type="text" name="{{currency.symbol}}[sell]" placeholder="{{currency.symbol}}-sell" value="">
+                    <input type="text" name="{{currency.symbol}}[buy]" placeholder="{{currency.symbol}}-buy" value="">
                 </label><br/>
             {{/each}}
         {{/if}}

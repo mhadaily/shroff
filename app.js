@@ -40,6 +40,9 @@ const setUpPassport = require("./routes/admin/setuppassport");
  */
 
 const index = require('./routes/index');
+
+const apiV1 = require('./routes/api/v1/index');
+
 const admin = require('./routes/admin/index');
 const category = require('./routes/admin/category/index');
 const currency = require('./routes/admin/currency/index');
@@ -92,6 +95,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+
+app.use('/api/v1/', apiV1);
 
 app.use('/admin', admin);
 app.use('/admin/category', category);
