@@ -12,6 +12,7 @@ router.get('/segment', function (req, res, next) {
 
   Segment
       .find()
+      .sort({createdAt: -1})
       .exec((err, segment) => {
         const all = [];
         segment.map(seg => all.push(seg));
