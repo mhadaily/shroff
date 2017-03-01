@@ -12,37 +12,8 @@ const session = require("express-session");
 const mongoose = require('mongoose');
 
 const setUpPassport = require("./routes/admin/setuppassport");
-
-/*
-
- // compress responses
- app.use(compression())
-
- // server-sent event stream
- app.get('/events', function (req, res) {
- res.setHeader('Content-Type', 'text/event-stream')
- res.setHeader('Cache-Control', 'no-cache')
-
- // send a ping approx every 2 seconds
- var timer = setInterval(function () {
- res.write('data: ping\n\n')
-
- // !!! this is the important part
- res.flush()
- }, 2000)
-
- res.on('close', function () {
- clearInterval(timer)
- })
- })
-
-
- */
-
 const index = require('./routes/index');
-
 const apiV1 = require('./routes/api/v1/index');
-
 const admin = require('./routes/admin/index');
 const category = require('./routes/admin/category/index');
 const currency = require('./routes/admin/currency/index');
@@ -50,22 +21,22 @@ const segment = require('./routes/admin/segment/index');
 const exchange = require('./routes/admin/exchange/index');
 
 const app = express();
+
 try {
   mongoose.connect('mongodb://mongodb_dev:27017/shroff-development');
 } catch (e) {
-  console.log('No Database!', e);
+  throw new Error(`No Database! ${e}`);
 }
 
 setUpPassport();
 
 app.use(helmet());
-// view engine setup
 
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -82,22 +53,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(session({
   secret: "LUp$Dg?,I#i&owP3=9su+OB%`JgL4muLF5YJ~{;t",
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: {
-    //secure: true,
+    secure: false,
     maxAge: 3600000
   }
 }));
-app.use(flash());
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
-
 app.use('/api/v1/', apiV1);
-
 app.use('/admin', admin);
 app.use('/admin/category', category);
 app.use('/admin/currency', currency);
@@ -122,3 +91,29 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+/*
+
+ //compress responses
+ app.use(compression())
+
+ // server-sent event stream
+ app.get('/events', function (req, res) {
+ res.setHeader('Content-Type', 'text/event-stream')
+ res.setHeader('Cache-Control', 'no-cache')
+
+ // send a ping approx every 2 seconds
+ var timer = setInterval(function () {
+ res.write('data: ping\n\n')
+
+ // !!! this is the important part
+ res.flush()
+ }, 2000)
+
+ res.on('close', function () {
+ clearInterval(timer)
+ })
+ })
+
+
+ */
