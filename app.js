@@ -53,17 +53,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(session({
   secret: "LUp$Dg?,I#i&owP3=9su+OB%`JgL4muLF5YJ~{;t",
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   cookie: {
     secure: false,
     maxAge: 3600000
   }
 }));
 
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
+
 
 app.use('/', index);
 app.use('/api/v1/', apiV1);
