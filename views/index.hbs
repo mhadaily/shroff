@@ -1,11 +1,82 @@
-<h1>{{title}}</h1><p>Welcome to Administrator of {{title}}</p>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a> <a class="mdl-navigation__link" href="">Link</a> <a
+                class="mdl-navigation__link" href="">Link</a> <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <h1>{{title}}</h1>
+            <!--Async data will be manipulated here-->
+            <div id="data">
+                <div class="mdl-grid"></div>
+            </div>
+        </div>
+        <footer class="mdl-mega-footer">
+            <div class="mdl-mega-footer__middle-section">
 
+                <div class="mdl-mega-footer__drop-down-section">
+                    <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                    <h1 class="mdl-mega-footer__heading">Features</h1>
+                    <ul class="mdl-mega-footer__link-list">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
 
-<h2>Example of latest Date in Each Segment</h2>
+                <div class="mdl-mega-footer__drop-down-section">
+                    <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                    <h1 class="mdl-mega-footer__heading">Details</h1>
+                    <ul class="mdl-mega-footer__link-list">
+                        <li><a href="#">Specs</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+
+                <div class="mdl-mega-footer__drop-down-section">
+                    <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                    <h1 class="mdl-mega-footer__heading">Technology</h1>
+                    <ul class="mdl-mega-footer__link-list">
+                        <li><a href="#">How it works</a></li>
+                        <li><a href="#">Patterns</a></li>
+                        <li><a href="#">Usage</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Contracts</a></li>
+                    </ul>
+                </div>
+
+                <div class="mdl-mega-footer__drop-down-section">
+                    <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                    <h1 class="mdl-mega-footer__heading">FAQ</h1>
+                    <ul class="mdl-mega-footer__link-list">
+                        <li><a href="#">Questions</a></li>
+                        <li><a href="#">Answers</a></li>
+                        <li><a href="#">Contact us</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="mdl-mega-footer__bottom-section">
+                <div class="mdl-logo">Title</div>
+                <ul class="mdl-mega-footer__link-list">
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy & Terms</a></li>
+                </ul>
+            </div>
+
+        </footer>
+    </main>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-
 <script>
 
     $.ajax('http://localhost:3030/api/v1/segment').then((res) => {
@@ -13,20 +84,18 @@
         res.map(segment => {
 
             $.getJSON("http://localhost:3030/api/v1/segment/" + segment._id, function (data) {
-                let items = [];
+                let items = null;
                 let currencies = data[0].currencyList[0];
 
-                items.push("<h3>" + segment.name + "</h3>");
-
+                items = `<div class="mdl-cell mdl-cell--4-col"><h3>${segment.name}</h3>`;
+                items += `<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">`;
+                items += `<thead><tr><th class="mdl-data-table__cell--non-numeric">NAME</th><th class="mdl-data-table__cell--non-numeric">BUY</th><th class="mdl-data-table__cell--non-numeric">SELL</th></tr></thead>`;
                 $.each(currencies, function (name, values) {
-                    items.push("<li id='" + name + "'><strong>" + name + "</strong>: Buy: <strong>" + values.buy + "</strong> | Sell: <strong>" + values.sell + "</strong></li>");
+                    items += `<tr><td id='${name}' class="mdl-data-table__cell--non-numeric"><strong>${name}</strong></td><td>${values.buy}</td><td>${values.sell}</td></tr>`;
                 });
+                items += `</table></div>`;
 
-                $("<ul/>", {
-                    "class": "my-new-list",
-                    html: items.join("")
-                }).appendTo("body");
-
+                $('#data .mdl-grid').append(items);
             });
 
         })
