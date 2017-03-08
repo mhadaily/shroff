@@ -78,11 +78,8 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script>
-
     $.ajax('http://localhost:3030/api/v1/segment').then((res) => {
-
         res.map(segment => {
-
             $.getJSON("http://localhost:3030/api/v1/segment/" + segment._id, function (data) {
                 let items = null;
                 let currencies = data[0].currencyList[0];
@@ -94,12 +91,8 @@
                     items += `<tr><td id='${name}' class="mdl-data-table__cell--non-numeric"><strong>${name}</strong></td><td>${values.buy}</td><td>${values.sell}</td></tr>`;
                 });
                 items += `</table></div>`;
-
                 $('#data .mdl-grid').append(items);
             });
-
         })
-
     });
-
 </script>
