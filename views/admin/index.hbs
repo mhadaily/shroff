@@ -1,13 +1,17 @@
-you are login as {{username}} | <a href="/admin/users/{{username}}/edit">Edit {{username}}</a> | <a href="/admin/logout">Logout</a>
-
-<nav>
-    <ul>
-        <li>Home</li>
-        <li><a href="/admin/users">User List</a></li>
-        <li><a href="/admin/users/add">Add User</a></li>
-        <li><a href="/admin/category/add">Add Category</a></li>
-        <li><a href="/admin/currency/add">Add Currency</a></li>
-        <li><a href="/admin/segment">Segments</a></li>
-        <li><a href="/admin/exchange">Exchange</a></li>
-    </ul>
-</nav>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <div class="mdl-layout__drawer">
+        {{> navbar}}
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <h1> </h1>
+            <!--Async data will be manipulated here-->
+            <div id="data">
+                <div class="mdl-grid">
+                    DASHBOARD
+                </div>
+            </div>
+        </div>
+        {{> footer}}
+    </main>
+</div>
