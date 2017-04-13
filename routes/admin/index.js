@@ -81,17 +81,17 @@ router.get("/users/:username", ensureAuthenticated, (req, res, next) => {
   });
 });
 
-//router.post("/users/:username/edit", ensureAuthenticated, (req, res, next) => {
-//  req.user.displayName = req.body.displayname;
-//  req.user.bio = req.body.bio;
-//  req.user.save((err) => {
-//    if (err) {
-//      next(err);
-//      return;
-//    }
-//    req.flash("info", "Profile updated!");
-//    res.redirect('/users');
-//  });
-//});
+router.post("/users/:username/edit", ensureAuthenticated, (req, res, next) => {
+  req.user.displayName = req.body.displayname;
+  req.user.bio = req.body.bio;
+  req.user.save((err) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    req.flash("info", "Profile updated!");
+    res.redirect('/users');
+  });
+});
 
 module.exports = router;
