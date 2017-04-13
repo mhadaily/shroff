@@ -8,8 +8,4 @@ export class Angular2FullStackPage {
   getNavbarHome() {
     return $$('app-root a').get(0).getText();
   }
-
-  getNavbarAbout() {
-    return $$('app-root a').get(1).getText();
-  }
 }
