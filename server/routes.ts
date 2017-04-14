@@ -1,7 +1,4 @@
-import * as express from 'express';
-
 import CatsCtrl from './controllers/cats';
-import Cat from './models/cat.model';
 
 export default function setRoutes(app) {
 
