@@ -3,7 +3,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { DataService } from './services/data.service';
+import { ExchangeService } from './services/exchange.service';
+import { CurrencyService } from './services/currency.service';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { GetObjectKeyPipe } from './pipes/get-object-key.pipe';
 
@@ -19,7 +20,8 @@ import { GetObjectKeyPipe } from './pipes/get-object-key.pipe';
     DynamicFormModule
   ],
   providers: [
-    DataService
+    ExchangeService,
+    CurrencyService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
