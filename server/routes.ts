@@ -13,6 +13,6 @@ export default function setRoutes(app) {
   app.route('/api/exchanges/:id')
      .get(exchange.get)
      .put(exchange.update)
-     .delete(exchange.delete);
+     .delete(exchange.remove);
 
 }
