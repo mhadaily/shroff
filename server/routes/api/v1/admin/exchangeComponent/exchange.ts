@@ -16,8 +16,10 @@ router.route('/')
       .get(exchange.getAll)
       .post(exchange.insert);
 router.route('/count')
+      .all(forAll)
       .get(exchange.count);
 router.route('/:id')
+      .all(forAll)
       .get(exchange.get)
       .put(exchange.update)
       .delete(exchange.remove);
