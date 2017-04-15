@@ -46,7 +46,7 @@
                    *ngFor="let exchange of currency.exchanges; let i = index;">
                 <div class="form-group" [formGroupName]="i">
                   <div class="form-group" [formGroupName]="lists[i]">
-                    <h3>{{lists[i]}}</h3>
+                    <h3>{{exchange | getObjectKey}}</h3>
                     <input class="form-control" type="number" formControlName="buy"
                            [(ngModel)]="exchange[lists[i]]['buy']" min="0">
                     <input class="form-control" type="number" formControlName="sell"
