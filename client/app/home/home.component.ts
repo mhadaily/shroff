@@ -12,16 +12,15 @@ import { ToastComponent } from '../shared/toast/toast.component';
 })
 export class HomeComponent implements OnInit {
 
-  cats = [];
+  exchanges = [];
   isLoading = true;
 
-  cat = {};
+  exchange = {};
   isEditing = false;
 
-  addCatForm: FormGroup;
+  addExchangeForm: FormGroup;
   name = new FormControl('', Validators.required);
-  age = new FormControl('', Validators.required);
-  weight = new FormControl('', Validators.required);
+  list = new FormControl('', Validators.required);
 
   constructor(private http: Http,
               private dataService: DataService,
@@ -29,65 +28,64 @@ export class HomeComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.getCats();
+    this.getExachnges();
 
-    this.addCatForm = this.formBuilder.group({
+    this.addExchangeForm = this.formBuilder.group({
       name: this.name,
-      age: this.age,
-      weight: this.weight
+      list: this.list,
     });
   }
 
-  getCats() {
-    this.dataService.getCats().subscribe(
-      data => this.cats = data,
+  getExachnges() {
+    this.dataService.getExchanges().subscribe(
+      data => this.exchanges = data,
       error => console.log(error),
       () => this.isLoading = false
     );
   }
 
-  addCat() {
-    this.dataService.addCat(this.addCatForm.value).subscribe(
+  addExchange() {
+    this.dataService.addExchange(this.addExchangeForm.value).subscribe(
       res => {
-        const newCat = res.json();
-        this.cats.push(newCat);
-        this.addCatForm.reset();
+        const newExchange = res.json();
+        this.exchanges.push(newExchange);
+        this.addExchangeForm.reset();
         this.toast.setMessage('item added successfully.', 'success');
       },
       error => console.log(error)
     );
   }
 
-  enableEditing(cat) {
+  enableEditing(exchange) {
     this.isEditing = true;
-    this.cat = cat;
+    this.exchange = exchange;
   }
 
   cancelEditing() {
     this.isEditing = false;
-    this.cat = {};
+    this.exchange = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
-    // reload the cats to reset the editing
-    this.getCats();
+    // reload the exchanges to reset the editing
+    this.getExachnges();
   }
 
-  editCat(cat) {
-    this.dataService.editCat(cat).subscribe(
+  editExchange(exchange) {
+    this.dataService.editExchange(exchange).subscribe(
       res => {
         this.isEditing = false;
-        this.cat = cat;
+        this.exchange = exchange;
         this.toast.setMessage('item edited successfully.', 'success');
       },
       error => console.log(error)
     );
   }
 
-  deleteCat(cat) {
+  deleteExchange(exchange) {
     if (window.confirm('Are you sure you want to permanently delete this item?')) {
-      this.dataService.deleteCat(cat).subscribe(
+      this.dataService.deleteExchange(exchange).subscribe(
         res => {
-          const pos = this.cats.map(elem => { return elem._id; }).indexOf(cat._id);
-          this.cats.splice(pos, 1);
+          const pos = this.exchanges.map(elem => { return elem._id; }).indexOf(exchange._id);
+          this.exchanges.splice(pos, 1);
           this.toast.setMessage('item deleted successfully.', 'success');
         },
         error => console.log(error)

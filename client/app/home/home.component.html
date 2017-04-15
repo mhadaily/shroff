@@ -8,47 +8,51 @@
 <app-toast [message]="toast.message"></app-toast>
 
 <div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Current cats ({{cats.length}})</h4>
+  <h4 class="card-header">Current exchnages ({{exchanges.length}})</h4>
   <div class="card-block">
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
       <tr>
         <th>Name</th>
-        <th>Age</th>
-        <th>Weight</th>
+        <th>List</th>
+        <th>CreateAt</th>
         <th>Actions</th>
       </tr>
       </thead>
-      <tbody *ngIf="cats.length === 0">
+      <tbody *ngIf="exchanges.length === 0">
       <tr>
-        <td colspan="4">There are no cats in the DB. Add a new cat below.</td>
+        <td colspan="4">There are no exchanges in the DB. Add a new exchange below.</td>
       </tr>
       </tbody>
       <tbody *ngIf="!isEditing">
-      <tr *ngFor="let cat of cats">
-        <td>{{cat.name}}</td>
-        <td>{{cat.age}}</td>
-        <td>{{cat.weight}}</td>
+      <tr *ngFor="let exchange of exchanges">
+        <td>{{exchange.name}}</td>
+        <td>{{exchange.list}}</td>
+        <td>{{exchange.createdAt}}</td>
         <td>
-          <button class="btn btn-sm btn-warning" (click)="enableEditing(cat)"><i class="fa fa-pencil"></i> Edit</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteCat(cat)"><i class="fa fa-trash"></i> Delete</button>
+          <button class="btn btn-sm btn-warning" (click)="enableEditing(exchange)"><i class="fa fa-pencil"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteExchange(exchange)"><i class="fa fa-trash"></i> Delete
+          </button>
         </td>
       </tr>
       </tbody>
       <tbody *ngIf="isEditing">
       <tr>
         <td colspan="4">
-          <form class="form-inline" #form="ngForm" (ngSubmit)="editCat(cat)" style="display:inline">
+          <form class="form-inline" #form="ngForm" (ngSubmit)="editExchange(exchange)" style="display:inline">
             <div class="form-group">
-              <input class="form-control" type="text" name="name" [(ngModel)]="cat.name" placeholder="Name" required>
-            </div>
-            <div class="form-group">
-              <input class="form-control" type="number" name="age" [(ngModel)]="cat.age" placeholder="Age" min="0"
+              <input class="form-control" type="text" name="name" [(ngModel)]="exchange.name" placeholder="Name"
                      required>
             </div>
             <div class="form-group">
-              <input class="form-control" type="number" name="weight" [(ngModel)]="cat.weight" placeholder="Weight"
-                     step="any" min="0" required>
+              <input class="form-control"
+                     type="number"
+                     name="list"
+                     [(ngModel)]="exchange.list"
+                     placeholder="Age"
+                     min="0"
+                     required>
             </div>
             <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i
               class="fa fa-floppy-o"></i> Save
@@ -63,20 +67,17 @@
 </div>
 
 <div class="card" *ngIf="!isEditing">
-  <h4 class="card-header">Add new cat</h4>
+  <h4 class="card-header">Add new exchange</h4>
   <div class="card-block">
-    <form class="form-inline" [formGroup]="addCatForm" (ngSubmit)="addCat()" style="text-align:center">
+    <form class="form-inline text-center" [formGroup]="addExchangeForm" (ngSubmit)="addExchange()">
       <div class="form-group">
         <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
       </div>
       <div class="form-group">
-        <input class="form-control" type="number" name="age" formControlName="age" placeholder="Age" min="0">
+        <input class="form-control" type="number" name="list" formControlName="list" placeholder="list" min="0">
       </div>
-      <div class="form-group">
-        <input class="form-control" type="number" name="weight" formControlName="weight" placeholder="Weight" step="any"
-               min="0">
-      </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!addCatForm.valid"><i class="fa fa-floppy-o"></i> Add
+      <button class="btn btn-primary" type="submit" [disabled]="!addExchangeForm.valid"><i class="fa fa-floppy-o"></i>
+        Add
       </button>
     </form>
   </div>
