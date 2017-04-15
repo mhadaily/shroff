@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 import * as path from 'path';
 
 import config from './config/db';
-import setRoutes from './routes';
+import setApiRoutes from './routes/api/v1/index';
 
 const app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -25,7 +25,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
 
-  setRoutes(app);
+  setApiRoutes(app);
 
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
