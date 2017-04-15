@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { DataService } from './services/data.service';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { AddExchangeComponent } from './add-exchange/add-exchange.component';
+import { GetObjectKeyPipe } from './pipes/get-object-key.pipe';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { AddExchangeComponent } from './add-exchange/add-exchange.component';
     AppComponent,
     HomeComponent,
     AddExchangeComponent,
+    GetObjectKeyPipe,
   ],
   imports: [
     AppRoutingModule,

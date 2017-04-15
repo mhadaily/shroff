@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormControlName, FormGroupName, FormArray } from '@angular/forms';
 
 import { DataService } from '../services/data.service';
 import { ToastComponent } from '../shared/toast/toast.component';
@@ -14,13 +14,11 @@ export class HomeComponent implements OnInit {
 
   exchanges = [];
   isLoading = true;
-
-  exchange = {};
+  lists = ['usd', 'euro'];
+  currency = {};
   isEditing = false;
 
   addExchangeForm: FormGroup;
-  name = new FormControl('', Validators.required);
-  list = new FormControl('', Validators.required);
 
   constructor(private http: Http,
               private dataService: DataService,
@@ -31,8 +29,20 @@ export class HomeComponent implements OnInit {
     this.getExachnges();
 
     this.addExchangeForm = this.formBuilder.group({
-      name: this.name,
-      list: this.list,
+      exchanges: this.formBuilder.array([
+        this.formBuilder.group({
+          usd: this.formBuilder.group({
+            buy: ['', Validators.required],
+            sell: ['', Validators.required]
+          })
+        }),
+        this.formBuilder.group({
+          euro: this.formBuilder.group({
+            buy: ['', Validators.required],
+            sell: ['', Validators.required]
+          })
+        })
+      ])
     });
   }
 
@@ -58,22 +68,23 @@ export class HomeComponent implements OnInit {
 
   enableEditing(exchange) {
     this.isEditing = true;
-    this.exchange = exchange;
+    this.currency = exchange;
   }
 
   cancelEditing() {
     this.isEditing = false;
-    this.exchange = {};
+    this.currency = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
     // reload the exchanges to reset the editing
     this.getExachnges();
   }
 
   editExchange(exchange) {
+    debugger
     this.dataService.editExchange(exchange).subscribe(
       res => {
         this.isEditing = false;
-        this.exchange = exchange;
+        this.currency = exchange;
         this.toast.setMessage('item edited successfully.', 'success');
       },
       error => console.log(error)

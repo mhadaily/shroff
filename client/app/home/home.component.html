@@ -13,9 +13,9 @@
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
       <tr>
-        <th>Name</th>
         <th>List</th>
-        <th>CreateAt</th>
+        <th>CreatedAt</th>
+        <th>updatedAt</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -26,9 +26,9 @@
       </tbody>
       <tbody *ngIf="!isEditing">
       <tr *ngFor="let exchange of exchanges">
-        <td>{{exchange.name}}</td>
-        <td>{{exchange.list}}</td>
-        <td>{{exchange.createdAt}}</td>
+        <td>{{exchange.exchanges | json}}</td>
+        <td>{{exchange.createdAt | date:"MM/dd/yy, hh:mm"}}</td>
+        <td>{{exchange.updatedAt | date:"MM/dd/yy, hh:mm"}}</td>
         <td>
           <button class="btn btn-sm btn-warning" (click)="enableEditing(exchange)"><i class="fa fa-pencil"></i> Edit
           </button>
@@ -40,24 +40,28 @@
       <tbody *ngIf="isEditing">
       <tr>
         <td colspan="4">
-          <form class="form-inline" #form="ngForm" (ngSubmit)="editExchange(exchange)" style="display:inline">
-            <div class="form-group">
-              <input class="form-control" type="text" name="name" [(ngModel)]="exchange.name" placeholder="Name"
-                     required>
+          <form class="form-inline text-center" [formGroup]="addExchangeForm" (ngSubmit)="editExchange(currency)">
+            <div formArrayName="exchanges">
+              <div class="form-group"
+                   *ngFor="let exchange of currency.exchanges; let i = index;">
+                <div class="form-group" [formGroupName]="i">
+                  <div class="form-group" [formGroupName]="lists[i]">
+                    <h3>{{lists[i]}}</h3>
+                    <input class="form-control" type="number" formControlName="buy"
+                           [(ngModel)]="exchange[lists[i]]['buy']" min="0">
+                    <input class="form-control" type="number" formControlName="sell"
+                           [(ngModel)]="exchange[lists[i]]['sell']" min="0">
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <div class="form-group">
-              <input class="form-control"
-                     type="number"
-                     name="list"
-                     [(ngModel)]="exchange.list"
-                     placeholder="Age"
-                     min="0"
-                     required>
-            </div>
-            <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i
+            <br>
+            <button class="btn btn-sm btn-primary" type="submit" [disabled]="!addExchangeForm.valid"><i
               class="fa fa-floppy-o"></i> Save
             </button>
           </form>
+          {{addExchangeForm.value | json }}
           <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
         </td>
       </tr>
@@ -70,15 +74,25 @@
   <h4 class="card-header">Add new exchange</h4>
   <div class="card-block">
     <form class="form-inline text-center" [formGroup]="addExchangeForm" (ngSubmit)="addExchange()">
-      <div class="form-group">
-        <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+      <div formArrayName="exchanges">
+        <div class="form-group"
+             *ngFor="let exchange of addExchangeForm.controls.exchanges.controls; let i = index;">
+
+          <div class="form-group" [formGroupName]="i">
+            <div class="form-group" [formGroupName]="lists[i]">
+              <h3>{{lists[i]}}</h3>
+              <input class="form-control" type="number" formControlName="buy" placeholder="buy" min="0">
+              <input class="form-control" type="number" formControlName="sell" placeholder="sell" min="0">
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="form-group">
-        <input class="form-control" type="number" name="list" formControlName="list" placeholder="list" min="0">
-      </div>
+      <br>
       <button class="btn btn-primary" type="submit" [disabled]="!addExchangeForm.valid"><i class="fa fa-floppy-o"></i>
         Add
       </button>
     </form>
+    {{ addExchangeForm.value | json }}
   </div>
 </div>
