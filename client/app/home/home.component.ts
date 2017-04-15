@@ -80,7 +80,6 @@ export class HomeComponent implements OnInit {
   }
 
   editExchange(exchange) {
-    debugger
     this.dataService.editExchange(exchange).subscribe(
       res => {
         this.isEditing = false;
