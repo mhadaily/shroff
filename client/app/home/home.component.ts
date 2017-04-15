@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder, FormControlName, FormGroupName, FormArray } from '@angular/forms';
 
-import { DataService } from '../services/data.service';
+import { ExchangeService } from '../services/exchange.service';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   addExchangeForm: FormGroup;
 
   constructor(private http: Http,
-              private dataService: DataService,
+              private dataService: ExchangeService,
               public toast: ToastComponent,
               private formBuilder: FormBuilder) { }
 
