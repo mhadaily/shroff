@@ -3,17 +3,24 @@ import { SharedModule } from '../shared/shared.module';
 
 import { HomepageComponent } from './homepage/homepage.component';
 import { ExchangesComponent } from './features/exchanges/exchanges.component';
+import { CurrenciesComponent } from './features/currencies/currencies.component';
+
+import { ExchangeRoutingModule } from './exchange.routes';
+import { IntroComponent } from './features/intro/intro.component';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    ExchangeRoutingModule
   ],
   declarations: [
     HomepageComponent,
-    ExchangesComponent
+    ExchangesComponent,
+    CurrenciesComponent,
+    IntroComponent
   ],
   exports: [
-    HomepageComponent
+    HomepageComponent,
   ]
 })
 export class ExchangeModule {

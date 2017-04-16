@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminHomepageComponent } from './homepage/homepage.component';
-import { EXCHANGE_FEATURES_ROUTE } from './exchange-features/exchange-features.routes';
 
 const routes: Routes = [
   {
-    path: '', component: AdminHomepageComponent, children: EXCHANGE_FEATURES_ROUTE
+    path: '', component: AdminHomepageComponent, children:[
+    { path: 'exchange', loadChildren: 'app/exchange/exchange.module#ExchangeModule'}
+  ]
   }
 ];
 
