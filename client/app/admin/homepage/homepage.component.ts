@@ -11,11 +11,12 @@ import { Component, OnInit } from '@angular/core';
         <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active"
            [routerLinkActiveOptions]="{exact:true}"> <i
           class="fa fa-home"></i> Admin Homepage </a>
+        <a [routerLink]="'exchange'" class="nav-item nav-link" routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact:true}"> <i
+          class="fa fa-home"></i> Exchange Features </a>
       </div>
     </nav>
-    <p>
-      {{ welcome }}
-    </p>
+    <router-outlet></router-outlet>
   `,
 })
 export class AdminHomepageComponent implements OnInit {
