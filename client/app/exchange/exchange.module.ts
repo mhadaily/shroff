@@ -6,7 +6,9 @@ import { ExchangesComponent } from './features/exchanges/exchanges.component';
 import { CurrenciesComponent } from './features/currencies/currencies.component';
 
 import { ExchangeRoutingModule } from './exchange.routes';
-import { IntroComponent } from './features/intro/intro.component';
+import { ExchangeService } from './services/exchange.service';
+import { CurrencyService } from './services/currency.service';
+import { ImageEncoderService } from './services/image-encoder.service';
 
 @NgModule({
   imports: [
@@ -17,7 +19,11 @@ import { IntroComponent } from './features/intro/intro.component';
     HomepageComponent,
     ExchangesComponent,
     CurrenciesComponent,
-    IntroComponent
+  ],
+  providers: [
+    ImageEncoderService,
+    ExchangeService,
+    CurrencyService
   ],
   exports: [
     HomepageComponent,
