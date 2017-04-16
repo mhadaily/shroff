@@ -18,7 +18,7 @@ import { ToastComponent } from '../../../shared/toast/toast.component';
     <app-toast [message]="toast.message"></app-toast>
 
     <div class="card" *ngIf="!isLoading">
-      <h4 class="card-header">Current exchnages ({{exchanges.length}})</h4>
+      <h4 class="card-header">Current exchanges ({{exchanges.length}})</h4>
       <div class="card-block">
         <table class="table table-bordered table-striped">
           <thead class="thead-default">
@@ -36,7 +36,13 @@ import { ToastComponent } from '../../../shared/toast/toast.component';
           </tbody>
           <tbody *ngIf="!isEditing">
           <tr *ngFor="let exchange of exchanges">
-            <td>{{exchange.exchanges | json}}</td>
+            <td>
+              <div class="row" *ngFor="let list of lists">
+                <strong>{{list}}</strong><br>
+                <small>BUY:{{exchange.exchanges[list].buy}}
+                SELL:{{exchange.exchanges[list].sell}}</small>
+              </div>
+            </td>
             <td>{{exchange.createdAt | date:"MM/dd/yy, hh:mm"}}</td>
             <td>{{exchange.updatedAt | date:"MM/dd/yy, hh:mm"}}</td>
             <td>
