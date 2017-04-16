@@ -29,20 +29,16 @@ export class HomeComponent implements OnInit {
     this.getExachnges();
 
     this.addExchangeForm = this.formBuilder.group({
-      exchanges: this.formBuilder.array([
-        this.formBuilder.group({
-          usd: this.formBuilder.group({
-            buy: ['', Validators.required],
-            sell: ['', Validators.required]
-          })
+      exchanges: this.formBuilder.group({
+        usd: this.formBuilder.group({
+          buy: ['', Validators.required],
+          sell: ['', Validators.required]
         }),
-        this.formBuilder.group({
-          euro: this.formBuilder.group({
-            buy: ['', Validators.required],
-            sell: ['', Validators.required]
-          })
+        euro: this.formBuilder.group({
+          buy: ['', Validators.required],
+          sell: ['', Validators.required]
         })
-      ])
+      })
     });
   }
 

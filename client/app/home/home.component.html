@@ -85,19 +85,16 @@
   <h4 class="card-header">Add new exchange</h4>
   <div class="card-block">
     <form class="form-inline text-center" [formGroup]="addExchangeForm" (ngSubmit)="addExchange()">
-      <div formArrayName="exchanges">
+      <div formGroupName="exchanges">
         <div class="form-group"
-             *ngFor="let exchange of addExchangeForm.controls.exchanges.controls; let i = index;">
-
-          <div class="form-group" [formGroupName]="i">
-            <div class="form-group" [formGroupName]="lists[i]">
-              <h3>{{lists[i]}}</h3>
+             *ngFor="let currency of lists;">
+            <div class="form-group" [formGroupName]="currency">
+              <h3>{{currency}}</h3>
               <input class="form-control" type="number" formControlName="buy" placeholder="buy" min="0">
               <input class="form-control" type="number" formControlName="sell" placeholder="sell" min="0">
             </div>
           </div>
 
-        </div>
       </div>
       <br>
       <button class="btn btn-primary" type="submit" [disabled]="!addExchangeForm.valid"><i class="fa fa-floppy-o"></i>

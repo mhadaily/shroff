@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const exchangeSchema = new Schema(
   {
     user: { type: String, required: false, trim: true },
-    exchanges: { type: Array, required: true },
+    exchanges: { type: Object, required: true },
   },
   {
     timestamps: true,
