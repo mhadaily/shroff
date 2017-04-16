@@ -11,13 +11,11 @@ import { HomeComponent } from './home/home.component';
 import { ExchangeService } from './exchange/services/exchange.service';
 import { CurrencyService } from './exchange/services/currency.service';
 
-import { GetObjectKeyPipe } from './pipes/get-object-key.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GetObjectKeyPipe
   ],
   imports: [
     BrowserModule,
