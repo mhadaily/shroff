@@ -109,7 +109,7 @@ export class ExchangesComponent implements OnInit {
 
   exchanges = [];
   isLoading = true;
-  lists = ['usd', 'euro'];
+  lists = ['USD', 'EUR','MYR'];
   exchangeRow = {};
   isEditing = false;
 
@@ -125,11 +125,15 @@ export class ExchangesComponent implements OnInit {
 
     this.addExchangeForm = this.formBuilder.group({
       exchanges: this.formBuilder.group({
-        usd: this.formBuilder.group({
+        USD: this.formBuilder.group({
           buy: ['', Validators.required],
           sell: ['', Validators.required]
         }),
-        euro: this.formBuilder.group({
+        EUR: this.formBuilder.group({
+          buy: ['', Validators.required],
+          sell: ['', Validators.required]
+        }),
+        MYR: this.formBuilder.group({
           buy: ['', Validators.required],
           sell: ['', Validators.required]
         })
