@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -7,14 +7,14 @@ import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
    imports: [
-       BrowserModule,
+       CommonModule,
        FormsModule,
        ReactiveFormsModule,
        HttpModule
    ],
    exports: [
        // Shared Modules
-       BrowserModule,
+       CommonModule,
        FormsModule,
        ReactiveFormsModule,
        HttpModule,
