@@ -1,9 +1,0 @@
-{{#if segments}}
-    {{#each segments as |segment|}}
-        <li>{{segment.name}}
-           <a href="/admin/exchange/{{segment._id}}/add">Add Exchange</a> |   <a href="/admin/exchange/{{segment._id}}">List Exchange</a>
-        </li>
-    {{/each}}
-{{else}}
-    No exchange
-{{/if}}
