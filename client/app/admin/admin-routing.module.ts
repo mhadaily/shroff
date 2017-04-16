@@ -3,7 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminHomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', component: AdminHomepageComponent }
+  {
+    path: '', component: AdminHomepageComponent, children:[
+    { path: 'exchange', loadChildren: 'app/exchange/exchange.module#ExchangeModule'}
+  ]
+  }
 ];
 
 @NgModule({
@@ -11,5 +15,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AdminRoutingModule {}
+export class AdminRoutingModule {
+}
 

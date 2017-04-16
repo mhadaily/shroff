@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' }
+  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
 ];
 
 @NgModule({
@@ -12,4 +12,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
