@@ -51,22 +51,20 @@
       <tbody *ngIf="isEditing">
       <tr>
         <td colspan="4">
-          <form class="form-inline text-center" [formGroup]="addExchangeForm" (ngSubmit)="editExchange(currency)">
-            <div formArrayName="exchanges">
+          <form class="form-inline text-center" [formGroup]="addExchangeForm" (ngSubmit)="editExchange(exchangeRow)">
+            <div formGroupName="exchanges">
               <div class="form-group"
-                   *ngFor="let exchange of currency.exchanges; let i = index;">
-                <div class="form-group" [formGroupName]="i">
-                  <div class="form-group" [formGroupName]="lists[i]">
-                    <h3>{{exchange | getObjectKey}}</h3>
-                    <input class="form-control" type="number" formControlName="buy"
-                           [(ngModel)]="exchange[lists[i]]['buy']" min="0">
-                    <input class="form-control" type="number" formControlName="sell"
-                           [(ngModel)]="exchange[lists[i]]['sell']" min="0">
-                  </div>
+                   *ngFor="let currency of lists;">
+                <div class="form-group" [formGroupName]="currency">
+                  <h3>{{currency}}</h3>
+                  <input class="form-control" type="number" [(ngModel)]="exchangeRow['exchanges'][currency]['buy']" formControlName="buy"
+                         placeholder="buy" min="0">
+                  <input class="form-control" type="number" [(ngModel)]="exchangeRow['exchanges'][currency]['sell']" formControlName="sell"
+                         placeholder="sell" min="0">
                 </div>
-
               </div>
             </div>
+
             <br>
             <button class="btn btn-sm btn-primary" type="submit" [disabled]="!addExchangeForm.valid"><i
               class="fa fa-floppy-o"></i> Save
@@ -88,13 +86,12 @@
       <div formGroupName="exchanges">
         <div class="form-group"
              *ngFor="let currency of lists;">
-            <div class="form-group" [formGroupName]="currency">
-              <h3>{{currency}}</h3>
-              <input class="form-control" type="number" formControlName="buy" placeholder="buy" min="0">
-              <input class="form-control" type="number" formControlName="sell" placeholder="sell" min="0">
-            </div>
+          <div class="form-group" [formGroupName]="currency">
+            <h3>{{currency}}</h3>
+            <input class="form-control" type="number" formControlName="buy" placeholder="buy" min="0">
+            <input class="form-control" type="number" formControlName="sell" placeholder="sell" min="0">
           </div>
-
+        </div>
       </div>
       <br>
       <button class="btn btn-primary" type="submit" [disabled]="!addExchangeForm.valid"><i class="fa fa-floppy-o"></i>

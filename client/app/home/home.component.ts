@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   exchanges = [];
   isLoading = true;
   lists = ['usd', 'euro'];
-  currency = {};
+  exchangeRow = {};
   isEditing = false;
 
   addExchangeForm: FormGroup;
@@ -64,12 +64,12 @@ export class HomeComponent implements OnInit {
 
   enableEditing(exchange) {
     this.isEditing = true;
-    this.currency = exchange;
+    this.exchangeRow = exchange;
   }
 
   cancelEditing() {
     this.isEditing = false;
-    this.currency = {};
+    this.exchangeRow = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
     // reload the exchanges to reset the editing
     this.getExachnges();
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
     this.dataService.editExchange(exchange).subscribe(
       res => {
         this.isEditing = false;
-        this.currency = exchange;
+        this.exchangeRow = exchange;
         this.toast.setMessage('item edited successfully.', 'success');
       },
       error => console.log(error)
