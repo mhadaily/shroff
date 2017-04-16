@@ -1,49 +1,63 @@
 {
   "name": "shroff",
-  "version": "0.0.1",
-  "author": "Majid Hajian <me@majidhajian.com> (https://www.majidhajian.com/)",
-  "description": "A Real Time Money Exchange Rate Application",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mhadaily/shroff.git"
-  },
-  "keywords": [
-    "Shroff",
-    "Money Exchange",
-    "Exchange Rate"
-  ],
-  "bugs": {
-    "url": "https://github.com/mhadaily/shroff/issues"
-  },
-  "engines": {
-    "node": ">= 7.4.0"
-  },
-  "homepage": "https://github.com/mhadaily/shroff",
-  "license": "Apache-2.0",
-  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Majid Hajian",
+  "description": "A real time exchange and stock application using Angular 4, Express, Mongoose and Node.",
+  "angular-cli": {},
   "scripts": {
-    "start": "node ./bin/www",
-    "startDev": "nodemon ./bin/www"
+    "ng": "ng",
+    "build": "ng build",
+    "start": "node dist/server/app.js",
+    "predev": "tsc -p server",
+    "dev": "concurrently \"mongod\" \"ng serve -pc proxy.conf.json --open\" \"tsc -w -p server\" \"nodemon\"",
+    "prod": "concurrently \"mongod\" \"ng build -aot -prod && tsc -p server && node dist/server/app.js\"",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
+  "private": true,
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
+    "@ngtools/webpack": "^1.3.0",
     "body-parser": "^1.17.1",
-    "compression": "1.6.2",
-    "connect-flash": "0.1.1",
-    "cookie-parser": "1.4.3",
-    "cookie-session": "^2.0.0-beta.1",
-    "csurf": "1.9.0",
-    "debug": "^2.6.3",
+    "bootstrap": "4.0.0-alpha.5",
+    "core-js": "^2.4.1",
     "express": "^4.15.2",
-    "express-session": "^1.15.2",
-    "hbs": "4.0.1",
-    "helmet": "^3.5.0",
-    "material-design-lite": "^1.3.0",
-    "mongoose": "^4.9.4",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "mongoose": "^4.9.1",
     "morgan": "^1.8.1",
-    "node-sass-middleware": "0.11.0",
-    "passport": "0.3.2",
-    "passport-local": "1.0.0",
-    "serve-favicon": "^2.4.1"
+    "rxjs": "^5.1.0",
+    "tether": "1.4.0",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@types/jasmine": "^2.5.47",
+    "@types/node": "^7.0.12",
+    "codelyzer": "^2.1.1",
+    "concurrently": "^3.3.0",
+    "jasmine-core": "~2.5.2",
+    "jasmine-spec-reporter": "^3.3.0",
+    "karma": "^1.6.0",
+    "karma-chrome-launcher": "~2.0.0",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^1.1.0",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "1.11.0",
+    "protractor": "~5.1.0",
+    "ts-node": "^3.0.2",
+    "tslint": "^5.1.0",
+    "typescript": "~2.2.0"
   }
 }
