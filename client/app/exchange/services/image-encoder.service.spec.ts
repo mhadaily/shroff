@@ -8,7 +8,7 @@ describe('ImageEncoderService', () => {
       providers: [ImageEncoderService]
     });
   });
-
+  
   it('should ...', inject([ImageEncoderService], (service: ImageEncoderService) => {
     expect(service).toBeTruthy();
   }));

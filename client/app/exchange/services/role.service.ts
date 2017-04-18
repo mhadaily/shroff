@@ -5,42 +5,41 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class ExchangeService {
-
+export class RoleService {
+  
   private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = new RequestOptions({ headers: this.headers });
-  private API_URL: string = '/api/v1/exchanges';
-
+  private API_URL: string = '/api/v1/roles';
+  
   constructor(private http: Http) { }
-
-  getExchanges(): Observable<any> {
+  
+  getRoles(): Observable<any> {
     return this.http.get(this.API_URL)
                .map(res => res.json());
   }
-
-  countExchnages(): Observable<any> {
+  
+  countRoles(): Observable<any> {
     return this.http.get(`${this.API_URL}/count`)
                .map(res => res.json());
   }
-
-  addExchange(exchange): Observable<any> {
+  
+  addRole(role): Observable<any> {
     return this.http
-               .post(this.API_URL, JSON.stringify(exchange), this.options);
+               .post(this.API_URL, JSON.stringify(role), this.options);
   }
-
-  getExchange(exchange): Observable<any> {
+  
+  getRole(role): Observable<any> {
     return this.http
-               .get(`${this.API_URL}/${exchange._id}`, this.options);
+               .get(`${this.API_URL}/${role._id}`, this.options);
   }
-
-  editExchange(exchange): Observable<any> {
+  
+  editRole(role): Observable<any> {
     return this.http
-               .put(`${this.API_URL}/${exchange._id}`, JSON.stringify(exchange), this.options);
+               .put(`${this.API_URL}/${role._id}`, JSON.stringify(role), this.options);
   }
-
-  deleteExchange(exchange): Observable<any> {
+  
+  deleteRole(role): Observable<any> {
     return this.http
-               .delete(`${this.API_URL}/${exchange._id}`, this.options);
+               .delete(`${this.API_URL}/${role._id}`, this.options);
   }
-
 }
