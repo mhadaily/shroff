@@ -5,20 +5,20 @@ import { CurrenciesComponent } from './currencies.component';
 describe('CurrenciesComponent', () => {
   let component: CurrenciesComponent;
   let fixture: ComponentFixture<CurrenciesComponent>;
-
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CurrenciesComponent ]
-    })
-    .compileComponents();
+             declarations: [CurrenciesComponent]
+           })
+           .compileComponents();
   }));
-
+  
   beforeEach(() => {
     fixture = TestBed.createComponent(CurrenciesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  
   it('should create', () => {
     expect(component).toBeTruthy();
   });
