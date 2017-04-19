@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CurrencyService } from '../../services/currency.service';
 import { ToastComponent } from '../../../shared/toast/toast.component';
 import { ImageEncoderService } from '../../services/image-encoder.service';
+import { MediaService } from '../../services/media.service';
 
 @Component({
   selector: 'exchange-currencies',
@@ -113,6 +114,7 @@ export class CurrenciesComponent implements OnInit {
   addCurrencyForm: FormGroup;
   
   constructor(private _currency: CurrencyService,
+              private _media: MediaService,
               public toast: ToastComponent,
               private formBuilder: FormBuilder,
               private _svc: ImageEncoderService) { }
@@ -133,15 +135,22 @@ export class CurrenciesComponent implements OnInit {
     // handle file changes
     const formData = new FormData();
     if (!fileList.length) return;
-    
-    // append the files to FormData
+
     Array
       .from(Array(fileList.length).keys())
       .map(x => {
         formData.append(fieldName, fileList[x], fileList[x].name);
       });
+    
     // save it
-    this.imageSave(formData);
+    // this.imageSave(formData);
+  
+    this._media.addMedia(formData).subscribe(
+      res => {
+        console.log(res.json());
+      },
+      error => console.log(error)
+    );
   }
   
   imageSave(formData: FormData) {
@@ -164,7 +173,7 @@ export class CurrenciesComponent implements OnInit {
   }
   
   addCurrency() {
-    let newValues = Object.assign({},this.addCurrencyForm.value);
+    let newValues = Object.assign({}, this.addCurrencyForm.value);
     newValues.image = this.uploaded.url;
     this._currency.addCurrency(newValues).subscribe(
       res => {

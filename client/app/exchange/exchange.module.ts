@@ -10,6 +10,7 @@ import { ExchangeRoutingModule } from './exchange.routes';
 import { ExchangeService } from './services/exchange.service';
 import { CurrencyService } from './services/currency.service';
 import { RoleService } from './services/role.service';
+import { MediaService } from './services/media.service';
 import { ImageEncoderService } from './services/image-encoder.service';
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ImageEncoderService } from './services/image-encoder.service';
     ImageEncoderService,
     ExchangeService,
     CurrencyService,
-    RoleService
+    RoleService,
+    MediaService
   ],
   exports: [
     HomepageComponent
