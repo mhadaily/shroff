@@ -34,7 +34,7 @@ export default class MediaCtrl extends BaseCtrl {
     });
     if (!fs.existsSync(UPLOAD_PATH)) fs.mkdirSync(UPLOAD_PATH);
     
-    const upload = multer({ storage }).single('currencyImage');
+    const upload = multer({ storage }).single('media');
     // const upload = multer({ dest: `${this.UPLOAD_PATH}/`}).single('avatar');
 
     

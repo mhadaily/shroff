@@ -86,7 +86,7 @@ import { MediaService } from '../../services/media.service';
           <input class="form-control" type="text" formControlName="code" placeholder="code" min="0">
           <input class="form-control" type="number" formControlName="base" placeholder="base" min="0">
           <input class="form-control" type="text" formControlName="country" placeholder="country" min="0">
-          <input class="form-control" type="file" name="currencyImage"
+          <input class="form-control" type="file" name="media"
                  (change)="imageFileChange($event.target.name, $event.target.files)"
                  formControlName="image" placeholder="image" accept="image/*">
           <div *ngIf="uploaded">
