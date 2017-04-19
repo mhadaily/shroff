@@ -3,15 +3,16 @@ const Schema = mongoose.Schema;
 
 const mediaSchema = new Schema(
   {
-    fileName: { type: String, required: false, trim: true },
-    originalFileName: { type: String, required: false, trim: true },
-    mimeType: { type: String, required: false, trim: true },
+    filename: { type: String, required: false, trim: true },
+    fieldname: { type: String, required: false, trim: true },
+    originalname: { type: String, required: false, trim: true },
+    mimetype: { type: String, required: false, trim: true },
     encoding: { type: String, required: false, trim: true },
-    fileSize: { type: Number, required: false, trim: true },
+    size: { type: Number, required: false, trim: true },
     mediaExtension: { type: String, required: false, trim: true },
-    destination: { type: Number, required: false, trim: true },
+    destination: { type: String, required: false, trim: true },
     lastModifiedDate: { type: String, required: false, trim: true },
-    path: { type: Number, required: false, trim: true }
+    path: { type: String, required: false, trim: true }
   },
   {
     timestamps: true
