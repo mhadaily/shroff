@@ -1,4 +1,3 @@
-// import * as cors from 'cors';
 // import * as fs from 'fs';
 // import * as path from 'path';
 // import { imageFilter, loadCollection, cleanFolder } from './utils';
