@@ -6,7 +6,7 @@ import * as path from 'path';
 import * as cors from 'cors';
 
 import config from './config/db';
-import setApiRoutes from './routes/api/v1/index'; //add index to satisfy IDEA
+import setApiRoutes from './routes/api/v1/index'; // add index to satisfy IDEA
 
 const app = express();
 app.set('port', (process.env.PORT || 3000));
