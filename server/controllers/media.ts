@@ -1,4 +1,3 @@
-// import * as cors from 'cors';
 // import * as fs from 'fs';
 // import * as path from 'path';
 // import { imageFilter, loadCollection, cleanFolder } from './utils';
@@ -23,10 +22,10 @@ export default class MediaCtrl extends BaseCtrl {
   
   mediaUpload(req, res) {
     const UPLOAD_PATH: string = 'uploads';
-    ;
+    const COLLECTION_NAME: string = 'images';
     const storage = multer.diskStorage({
       destination: function(req, file, cb) {
-        cb(null, `${UPLOAD_PATH}`);
+        cb(null, `${UPLOAD_PATH}/`);
       },
       filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now());
@@ -36,7 +35,6 @@ export default class MediaCtrl extends BaseCtrl {
     
     const upload = multer({ storage }).single('media');
     // const upload = multer({ dest: `${this.UPLOAD_PATH}/`}).single('avatar');
-
     
     upload(req, res, function(err) {
       if (err) {
