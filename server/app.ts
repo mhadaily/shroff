@@ -26,17 +26,17 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
-  
+
   setApiRoutes(app);
-  
+
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
-  
+
   app.listen(app.get('port'), () => {
     console.log('Shroff listening on port ' + app.get('port'));
   });
-  
+
 });
 
 export { app };
