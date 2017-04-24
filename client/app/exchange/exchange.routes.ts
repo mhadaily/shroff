@@ -6,7 +6,6 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RolesComponent } from './features/roles/roles.component';
 
 export const EXCHANGE_ROUTE: Routes = [
-  
   {
     path: '', component: HomepageComponent, children: [
     {

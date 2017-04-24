@@ -6,7 +6,7 @@ import { ExchangeService } from '../../services/exchange.service';
 import { ToastComponent } from '../../../shared/toast/toast.component';
 
 @Component({
-  selector: 'exchange-exchanges',
+  selector: 'app-exchange-exchanges',
   template: `
     <div class="card" *ngIf="isLoading">
       <h4 class="card-header">Loading...</h4>

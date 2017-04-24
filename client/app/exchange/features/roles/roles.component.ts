@@ -5,7 +5,7 @@ import { RoleService } from '../../services/role.service';
 import { ToastComponent } from '../../../shared/toast/toast.component';
 
 @Component({
-  selector: 'exchange-roles',
+  selector: 'app-exchange-roles',
   template: `
     <div class="card" *ngIf="isLoading">
       <h4 class="card-header">Loading...</h4>
@@ -13,9 +13,9 @@ import { ToastComponent } from '../../../shared/toast/toast.component';
         <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
       </div>
     </div>
-    
+
     <app-toast [message]="toast.message"></app-toast>
-    
+
     <div class="card" *ngIf="!isLoading">
       <h4 class="card-header">Current Roles ({{roles.length}})</h4>
       <div class="card-block">
@@ -63,7 +63,7 @@ import { ToastComponent } from '../../../shared/toast/toast.component';
         </table>
       </div>
     </div>
-    
+
     <div class="card" *ngIf="!isEditing">
       <h4 class="card-header">Add new role</h4>
       <div class="card-block">
@@ -81,28 +81,28 @@ import { ToastComponent } from '../../../shared/toast/toast.component';
   styles: []
 })
 export class RolesComponent implements OnInit {
-  
+
   uploaded;
   roles = [];
   isLoading = true;
   roleRow = {};
   isEditing = false;
-  
+
   addRoleForm: FormGroup;
-  
+
   constructor(private _role: RoleService,
               public toast: ToastComponent,
               private formBuilder: FormBuilder) { }
-  
+
   ngOnInit() {
     this.getRoles();
-    
+
     this.addRoleForm = this.formBuilder.group({
       name: ['', Validators.required],
       level: ['', Validators.required]
     });
   }
-  
+
   getRoles() {
     this._role.getRoles().subscribe(
       data => this.roles = data,
@@ -110,7 +110,7 @@ export class RolesComponent implements OnInit {
       () => this.isLoading = false
     );
   }
-  
+
   addRole() {
     this._role.addRole(this.addRoleForm.value).subscribe(
       res => {
@@ -122,12 +122,12 @@ export class RolesComponent implements OnInit {
       error => console.log(error)
     );
   }
-  
+
   enableEditing(role) {
     this.isEditing = true;
     this.roleRow = role;
   }
-  
+
   cancelEditing() {
     this.isEditing = false;
     this.roleRow = {};
@@ -135,7 +135,7 @@ export class RolesComponent implements OnInit {
     // reload the roles to reset the editing
     this.getRoles();
   }
-  
+
   editRole(role) {
     this._role.editRole(role).subscribe(
       res => {
@@ -146,7 +146,7 @@ export class RolesComponent implements OnInit {
       error => console.log(error)
     );
   }
-  
+
   deleteRole(role) {
     if (window.confirm('Are you sure you want to permanently delete this item?')) {
       this._role.deleteRole(role).subscribe(
@@ -159,5 +159,5 @@ export class RolesComponent implements OnInit {
       );
     }
   }
-  
+
 }

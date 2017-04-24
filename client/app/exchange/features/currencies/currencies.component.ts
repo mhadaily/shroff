@@ -7,7 +7,7 @@ import { ImageEncoderService } from '../../services/image-encoder.service';
 import { MediaService } from '../../services/media.service';
 
 @Component({
-  selector: 'exchange-currencies',
+  selector: 'app-exchange-currencies',
   template: `
     <div class="card" *ngIf="isLoading">
       <h4 class="card-header">Loading...</h4>
@@ -15,9 +15,9 @@ import { MediaService } from '../../services/media.service';
         <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
       </div>
     </div>
-    
+
     <app-toast [message]="toast.message"></app-toast>
-    
+
     <div class="card" *ngIf="!isLoading">
       <h4 class="card-header">Current Currencies ({{currencies.length}})</h4>
       <div class="card-block">
@@ -77,7 +77,7 @@ import { MediaService } from '../../services/media.service';
         </table>
       </div>
     </div>
-    
+
     <div class="card" *ngIf="!isEditing">
       <h4 class="card-header">Add new currency</h4>
       <div class="card-block">
@@ -104,24 +104,24 @@ import { MediaService } from '../../services/media.service';
   styles: []
 })
 export class CurrenciesComponent implements OnInit {
-  
+
   uploaded;
   currencies = [];
   isLoading = true;
   currencyRow = {};
   isEditing = false;
-  
+
   addCurrencyForm: FormGroup;
-  
+
   constructor(private _currency: CurrencyService,
               private _media: MediaService,
               public toast: ToastComponent,
               private formBuilder: FormBuilder,
               private _svc: ImageEncoderService) { }
-  
+
   ngOnInit() {
     this.getCurrencies();
-    
+
     this.addCurrencyForm = this.formBuilder.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
@@ -130,21 +130,23 @@ export class CurrenciesComponent implements OnInit {
       country: ['', Validators.required]
     });
   }
-  
+
   imageFileChange(fieldName: string, fileList: FileList) {
     // handle file changes
     const formData = new FormData();
-    if (!fileList.length) return;
+    if (!fileList.length) {
+      return;
+    }
 
     Array
       .from(Array(fileList.length).keys())
       .map(x => {
         formData.append(fieldName, fileList[x], fileList[x].name);
       });
-    
+
     // save it
     // this.imageSave(formData);
-  
+
     this._media.addMedia(formData).subscribe(
       res => {
         console.log(res.json());
@@ -152,7 +154,7 @@ export class CurrenciesComponent implements OnInit {
       error => console.log(error)
     );
   }
-  
+
   imageSave(formData: FormData) {
     // upload data to the server
     this._svc.upload(formData)
@@ -163,7 +165,7 @@ export class CurrenciesComponent implements OnInit {
           },
           err => console.log(err));
   }
-  
+
   getCurrencies() {
     this._currency.getCurrencies().subscribe(
       data => this.currencies = data,
@@ -171,9 +173,9 @@ export class CurrenciesComponent implements OnInit {
       () => this.isLoading = false
     );
   }
-  
+
   addCurrency() {
-    let newValues = Object.assign({}, this.addCurrencyForm.value);
+    const newValues = Object.assign({}, this.addCurrencyForm.value);
     newValues.image = this.uploaded.url;
     this._currency.addCurrency(newValues).subscribe(
       res => {
@@ -185,12 +187,12 @@ export class CurrenciesComponent implements OnInit {
       error => console.log(error)
     );
   }
-  
+
   enableEditing(currency) {
     this.isEditing = true;
     this.currencyRow = currency;
   }
-  
+
   cancelEditing() {
     this.isEditing = false;
     this.currencyRow = {};
@@ -198,7 +200,7 @@ export class CurrenciesComponent implements OnInit {
     // reload the currencies to reset the editing
     this.getCurrencies();
   }
-  
+
   editCurrency(currency) {
     this._currency.editCurrency(currency).subscribe(
       res => {
@@ -209,7 +211,7 @@ export class CurrenciesComponent implements OnInit {
       error => console.log(error)
     );
   }
-  
+
   deleteCurrency(currency) {
     if (window.confirm('Are you sure you want to permanently delete this item?')) {
       this._currency.deleteCurrency(currency).subscribe(
@@ -222,5 +224,5 @@ export class CurrenciesComponent implements OnInit {
       );
     }
   }
-  
+
 }
