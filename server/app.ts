@@ -6,7 +6,7 @@ import * as path from 'path';
 import * as cors from 'cors';
 
 import config from './config/db';
-import setApiRoutes from './routes/api/v1/index'; //add index to satisfy IDEA
+import setApiRoutes from './routes/api/v1/index'; // add index to satisfy IDEA
 
 const app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -26,17 +26,17 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
-  
+
   setApiRoutes(app);
-  
+
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
-  
+
   app.listen(app.get('port'), () => {
     console.log('Shroff listening on port ' + app.get('port'));
   });
-  
+
 });
 
 export { app };

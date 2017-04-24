@@ -8,7 +8,7 @@ describe('RoleService', () => {
       providers: [RoleService]
     });
   });
-  
+
   it('should ...', inject([RoleService], (service: RoleService) => {
     expect(service).toBeTruthy();
   }));

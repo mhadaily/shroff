@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'exchange-homepage',
+  selector: 'app-exchange-homepage',
   template: `
     <a [routerLink]="'exchanges'" class="nav-item nav-link" routerLinkActive="active"
        [routerLinkActiveOptions]="{exact:true}"> <i
@@ -17,11 +17,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-  
+
   constructor() { }
-  
+
   ngOnInit() {
     console.log('exchnage cmodule');
   }
-  
+
 }

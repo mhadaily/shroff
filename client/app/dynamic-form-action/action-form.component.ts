@@ -7,13 +7,13 @@ import { DynamicFormComponent } from '../dynamic-form/containers/dynamic-form/dy
 @Component({
   selector: 'add-exchange',
   template: `
-      <dynamic-form
-        [config]="config"
-        #form="dynamicForm"
-        (submit)="submit($event)">
-      </dynamic-form>
-      {{ form.valid }}
-      {{ form.value | json }}
+    <dynamic-form
+      [config]="config"
+      #form="dynamicForm"
+      (submit)="submit($event)">
+    </dynamic-form>
+    {{ form.valid }}
+    {{ form.value | json }}
   `
 })
 export class AddExchangeComponent implements AfterViewInit {

@@ -9,7 +9,7 @@ export class CurrencyService {
 
   private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = new RequestOptions({ headers: this.headers });
-  private API_URL: string = '/api/v1/currencies';
+  private API_URL = '/api/v1/currencies';
 
   constructor(private http: Http) { }
 
