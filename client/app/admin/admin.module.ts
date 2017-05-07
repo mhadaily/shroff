@@ -3,8 +3,11 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AdminHomepageComponent } from './homepage/homepage.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import { UserComponent } from './user/user.component';
+
 import { RoleService } from './services/role.service';
+import { UserService } from './services/user.service';
+
+import { UsersComponent } from './user/user.component';
 import { RolesComponent } from './roles/roles.component';
 
 @NgModule({
@@ -14,11 +17,12 @@ import { RolesComponent } from './roles/roles.component';
   ],
   declarations: [
     AdminHomepageComponent,
-    UserComponent,
+    UsersComponent,
     RolesComponent
   ],
   providers: [
-    RoleService
+    RoleService,
+    UserService
   ]
 })
 
