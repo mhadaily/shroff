@@ -1,5 +1,5 @@
 import * as express from 'express';
-import MediaCtrl from '../../../../../controllers/media';
+import MediaCtrl from '../../../../../controllers/media.controller';
 const router = express.Router();
 
 const media = new MediaCtrl();

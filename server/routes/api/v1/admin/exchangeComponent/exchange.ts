@@ -1,5 +1,5 @@
 import * as express from 'express';
-import ExchangeCtrl from '../../../../../controllers/exchange';
+import ExchangeCtrl from '../../../../../controllers/exchange.controller';
 const router = express.Router();
 
 const exchange = new ExchangeCtrl();
