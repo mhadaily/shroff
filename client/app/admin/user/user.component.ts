@@ -22,8 +22,11 @@ import { ToastComponent } from '../../shared/toast/toast.component';
         <table class="table table-bordered table-striped">
           <thead class="thead-default">
           <tr>
-            <th>Name</th>
-            <th>Level</th>
+            <th>Email/Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role / Level</th>
+            <th>Password</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -34,8 +37,11 @@ import { ToastComponent } from '../../shared/toast/toast.component';
           </tbody>
           <tbody *ngIf="!isEditing">
           <tr *ngFor="let user of users">
-            <td>{{user.name}}</td>
-            <td>{{user.level}}</td>
+            <td>{{user.emailUsername}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.roleLevel}}</td>
+            <td>{{user.password}}</td>
             <td>
               <button class="btn btn-sm btn-warning" (click)="enableEditing(user)"><i class="fa fa-pencil"></i> Edit
               </button>
@@ -47,10 +53,19 @@ import { ToastComponent } from '../../shared/toast/toast.component';
           <tbody *ngIf="isEditing">
           <tr>
             <td colspan="6">
-              <form class="form-inline text-center" enctype="multipart/form-data" [formGroup]="addUserForm"
+              <form class="form-inline text-center" [formGroup]="addUserForm"
                     (ngSubmit)="editUser(userRow)">
-                <input class="form-control" type="text" [(ngModel)]='userRow.name' formControlName="name" placeholder="name" min="0">
-                <input class="form-control" type="text" [(ngModel)]='userRow.level' formControlName="level" placeholder="level" min="0">
+                <input class="form-control" type="text"
+                       [(ngModel)]='userRow["emailUsername"]'
+                       formControlName="name" placeholder="name" min="0">
+                <input class="form-control" type="text" [(ngModel)]='userRow["firstName"]'
+                       formControlName="level" placeholder="level" min="0">
+                <input class="form-control" type="text" [(ngModel)]='userRow["lastName"]'
+                       formControlName="level" placeholder="level" min="0">
+                <input class="form-control" type="text" [(ngModel)]='userRow["roleLevel"]'
+                       formControlName="level" placeholder="level" min="0">
+                <input class="form-control" type="text" [(ngModel)]='userRow["password"]'
+                       formControlName="level" placeholder="level" min="0">
                 <button class="btn btn-sm btn-primary" type="submit" [disabled]="!addUserForm.valid"><i
                   class="fa fa-floppy-o"></i> Save
                 </button>
@@ -68,8 +83,11 @@ import { ToastComponent } from '../../shared/toast/toast.component';
       <h4 class="card-header">Add new user</h4>
       <div class="card-block">
         <form class="form-inline text-center" [formGroup]="addUserForm" (ngSubmit)="addUser()">
-          <input class="form-control" type="text" formControlName="name" placeholder="name" min="0">
-          <input class="form-control" type="text" formControlName="level" placeholder="code" min="0">
+          <input class="form-control" type="text" formControlName="emailUsername" placeholder="Email/Username" min="0">
+          <input class="form-control" type="text" formControlName="firstName" placeholder="First Name" min="0">
+          <input class="form-control" type="text" formControlName="lastName" placeholder="Last Name" min="0">
+          <input class="form-control" type="text" formControlName="roleLevel" placeholder="Role/Level" min="0">
+          <input class="form-control" type="text" formControlName="password" placeholder="Password" min="0">
           <button class="btn btn-primary" type="submit" [disabled]="!addUserForm.valid"><i class="fa fa-floppy-o"></i>
             Add
           </button>
@@ -82,7 +100,6 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 })
 export class UsersComponent implements OnInit {
 
-  uploaded;
   users = [];
   isLoading = true;
   userRow = {};
@@ -98,8 +115,11 @@ export class UsersComponent implements OnInit {
     this.getUsers();
 
     this.addUserForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      level: ['', Validators.required]
+      emailUsername: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      roleLevel: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
