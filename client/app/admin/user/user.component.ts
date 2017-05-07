@@ -57,15 +57,15 @@ import { ToastComponent } from '../../shared/toast/toast.component';
                     (ngSubmit)="editUser(userRow)">
                 <input class="form-control" type="text"
                        [(ngModel)]='userRow["emailUsername"]'
-                       formControlName="name" placeholder="name" min="0">
+                       formControlName="emailUsername" placeholder="name" min="0">
                 <input class="form-control" type="text" [(ngModel)]='userRow["firstName"]'
-                       formControlName="level" placeholder="level" min="0">
+                       formControlName="firstName" placeholder="level" min="0">
                 <input class="form-control" type="text" [(ngModel)]='userRow["lastName"]'
-                       formControlName="level" placeholder="level" min="0">
+                       formControlName="lastName" placeholder="level" min="0">
                 <input class="form-control" type="text" [(ngModel)]='userRow["roleLevel"]'
-                       formControlName="level" placeholder="level" min="0">
+                       formControlName="roleLevel" placeholder="level" min="0">
                 <input class="form-control" type="text" [(ngModel)]='userRow["password"]'
-                       formControlName="level" placeholder="level" min="0">
+                       formControlName="password" placeholder="level" min="0">
                 <button class="btn btn-sm btn-primary" type="submit" [disabled]="!addUserForm.valid"><i
                   class="fa fa-floppy-o"></i> Save
                 </button>
