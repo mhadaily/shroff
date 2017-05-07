@@ -3,6 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AdminHomepageComponent } from './homepage/homepage.component';
 import { AdminRoutingModule } from './admin-routing.module';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { AdminRoutingModule } from './admin-routing.module';
   ],
   declarations: [
     AdminHomepageComponent,
+    UserComponent
   ]
 })
 

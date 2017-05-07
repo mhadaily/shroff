@@ -18,9 +18,9 @@ import { Component, OnInit } from '@angular/core';
            [routerLinkActiveOptions]="{exact:true}"> <i
           class="fa fa-home"></i> Exchange Module </a>
 
-        <!--<a [routerLink]="['exchange','exchanges']" class="nav-item nav-link" routerLinkActive="active"-->
-        <!--[routerLinkActiveOptions]="{exact:true}"> <i-->
-        <!--class="fa fa-home"></i> Exchanges </a>-->
+        <a [routerLink]="['user']" class="nav-item nav-link" routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact:true}"> <i
+          class="fa fa-home"></i> Users </a>
 
         <!--<a [routerLink]="['exchange','currencies']" class="nav-item nav-link" routerLinkActive="active"-->
         <!--[routerLinkActiveOptions]="{exact:true}"> <i-->
