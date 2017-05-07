@@ -4,8 +4,8 @@ import { AdminHomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   {
-    path: '', component: AdminHomepageComponent, children:[
-    { path: 'exchange', loadChildren: 'app/exchange/exchange.module#ExchangeModule'}
+    path: '', component: AdminHomepageComponent, children: [
+    { path: 'exchange', loadChildren: 'app/exchange/exchange.module#ExchangeModule' }
   ]
   }
 ];
