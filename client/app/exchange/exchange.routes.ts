@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ExchangesComponent } from './features/exchanges/exchanges.component';
 import { CurrenciesComponent } from './features/currencies/currencies.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { RolesComponent } from './features/roles/roles.component';
 
 export const EXCHANGE_ROUTE: Routes = [
   {
@@ -15,10 +14,6 @@ export const EXCHANGE_ROUTE: Routes = [
     {
       path: 'currencies',
       component: CurrenciesComponent
-    },
-    {
-      path: 'roles',
-      component: RolesComponent
     }
   ]
   }

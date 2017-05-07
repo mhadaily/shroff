@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-import { RoleService } from '../../services/role.service';
-import { ToastComponent } from '../../../shared/toast/toast.component';
+import { RoleService } from '../services/role.service';
+import { ToastComponent } from '../../shared/toast/toast.component';
 
 @Component({
-  selector: 'app-exchange-roles',
+  selector: 'app-roles',
   template: `
     <div class="card" *ngIf="isLoading">
       <h4 class="card-header">Loading...</h4>

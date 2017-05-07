@@ -1,5 +1,5 @@
 import * as express from 'express';
-import CurrencyCtrl from '../../../../../controllers/currency';
+import CurrencyCtrl from '../../../../../controllers/currency.controller';
 const router = express.Router();
 
 const currency = new CurrencyCtrl();

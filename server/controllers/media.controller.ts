@@ -4,7 +4,7 @@
 import * as multer from 'multer';
 
 import Media from '../models/media.model';
-import BaseCtrl from './base';
+import BaseCtrl from './base.controller';
 import * as fs from 'fs';
 
 export default class MediaCtrl extends BaseCtrl {
@@ -13,13 +13,13 @@ export default class MediaCtrl extends BaseCtrl {
   private UPLOAD_PATH: string = 'uploads';
   private storage: any;
   private upload;
-  
+
   constructor() {
     super();
     this.model = Media;
     // this.upload = multer({ dest: `${this.UPLOAD_PATH}/`/*, fileFilter: imageFilter*/ });
   }
-  
+
   mediaUpload(req, res) {
     const UPLOAD_PATH: string = 'uploads';
     const COLLECTION_NAME: string = 'images';
@@ -32,10 +32,10 @@ export default class MediaCtrl extends BaseCtrl {
       }
     });
     if (!fs.existsSync(UPLOAD_PATH)) fs.mkdirSync(UPLOAD_PATH);
-    
+
     const upload = multer({ storage }).single('media');
     // const upload = multer({ dest: `${this.UPLOAD_PATH}/`}).single('avatar');
-    
+
     upload(req, res, function(err) {
       if (err) {
         res.json({ error_code: 1, err_desc: err });
@@ -49,7 +49,7 @@ export default class MediaCtrl extends BaseCtrl {
       });
     });
   }
-  
+
   // mediaUpload(req, res) {
   //   const obj = new this.model(req.body);
   //   obj.save((err, item) => {
@@ -57,10 +57,10 @@ export default class MediaCtrl extends BaseCtrl {
   //     res.status(200).json(item);
   //   });
   // }
-  
+
   // optional: clean all data before start
   // cleanFolder(UPLOAD_PATH);
-  
+
   // async singleImage(req, res) {
   //   try {
   //     const col = await loadCollection(COLLECTION_NAME, db);
@@ -72,7 +72,7 @@ export default class MediaCtrl extends BaseCtrl {
   //     res.sendStatus(400);
   //   }
   // }
-  
+
   // app.post('/photos/upload', upload.array('photos', 12), async (req, res) => {
   //   try {
   //     const col = await loadCollection(COLLECTION_NAME, db)
@@ -110,5 +110,5 @@ export default class MediaCtrl extends BaseCtrl {
   //     res.sendStatus(400);
   //   }
   // })
-  
+
 }
