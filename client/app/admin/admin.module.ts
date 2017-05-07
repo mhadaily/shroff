@@ -4,6 +4,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminHomepageComponent } from './homepage/homepage.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { UserComponent } from './user/user.component';
+import { RoleService } from './services/role.service';
+import { RolesComponent } from './roles/roles.component';
 
 @NgModule({
   imports: [
@@ -12,8 +14,13 @@ import { UserComponent } from './user/user.component';
   ],
   declarations: [
     AdminHomepageComponent,
-    UserComponent
+    UserComponent,
+    RolesComponent
+  ],
+  providers: [
+    RoleService
   ]
 })
 
-export class AdminModule {}
+export class AdminModule {
+}

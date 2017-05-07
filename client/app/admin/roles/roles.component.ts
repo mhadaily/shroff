@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-import { RoleService } from '../../services/role.service';
-import { ToastComponent } from '../../../shared/toast/toast.component';
+import { RoleService } from '../services/role.service';
+import { ToastComponent } from '../../shared/toast/toast.component';
 
 @Component({
   selector: 'app-exchange-roles',
