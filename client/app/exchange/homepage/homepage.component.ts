@@ -18,7 +18,7 @@ export class HomepageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('exchnage cmodule');
+    console.log('Exchange module');
   }
 
 }
