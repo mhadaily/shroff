@@ -2,8 +2,24 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-toast',
-  templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.scss']
+  template: `
+    <div *ngIf="message.body" class="alert alert-{{message.type}} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Message:</strong> {{message.body}}
+    </div>
+  `,
+  styles: [`
+    .alert {
+      z-index: 999;
+      position: fixed;
+      bottom: 15px;
+      left: 25%;
+      width: 50%;
+      opacity: 0.9;
+    }
+  `]
 })
 export class ToastComponent {
   @Input() message = { body: '', type: '' };

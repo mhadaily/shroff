@@ -11,7 +11,7 @@ import { GetObjectKeyPipe } from './pipes/get-object-key.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpModule
   ],
   exports: [
     CommonModule,
