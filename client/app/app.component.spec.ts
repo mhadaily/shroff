@@ -9,12 +9,12 @@ import { AppComponent } from './app.component';
 describe('Component: App', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  beforeEach( async(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents().then(() => {
+             declarations: [AppComponent],
+             schemas: [NO_ERRORS_SCHEMA]
+           })
+           .compileComponents().then(() => {
       fixture = TestBed.createComponent(AppComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();

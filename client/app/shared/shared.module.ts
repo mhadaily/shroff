@@ -11,15 +11,13 @@ import { GetObjectKeyPipe } from './pipes/get-object-key.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpModule
   ],
   exports: [
-    // Shared Modules
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    // Shared Components
     ToastComponent,
     GetObjectKeyPipe
   ],
